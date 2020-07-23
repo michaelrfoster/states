@@ -10,6 +10,11 @@ import React from 'react';
 //import Styled from 'styled-components/native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
+
+//import _jquery from 'jquery';
+import $ from 'jquery';
+//import jquery.default.getJSON from 'jquery';
+// import {map_data} from './shapefile_data/topo_four.js';
 //const Container = Styled.View '
 //flex: 1;'
 //;
@@ -29,6 +34,8 @@ import {
   View,
   Text,
   StatusBar,
+  TextInput,
+  Button,
   PermissionsAndroid
 } from 'react-native';
 
@@ -46,6 +53,19 @@ map: {
 },
 });
 
+function load_map_data ()
+{
+  console.log("no errors yet");
+ // console.log()
+//  $.getJSON("shapefile_data/topo_four.json", function (data) {
+//  console.log("here 99");
+  //$.each(data, function (key, val) {
+  //console.log("here inner 44");
+  //});
+
+//  });
+}
+
 function get_location ()
 {
 //if (hasLocationPermission)
@@ -61,6 +81,11 @@ Geolocation.getCurrentPosition(
     );
 //    }
 
+}
+
+function buttonPressed ()
+{
+console.log('button pressed');
 }
 
 async function request_location_permission() {
@@ -97,6 +122,9 @@ try {
     console.log("tag9999999994444444");
     get_location();
 
+    console.log("new stuff");
+    load_map_data();
+
 
 const App: () => React$Node = () => {
   return (
@@ -105,15 +133,34 @@ const App: () => React$Node = () => {
 
   //  <>
 
-    <MapView
-    style={my_styles.map}
-      initialRegion = {{
-      latitude: 37.78825,
-      longitude: -122.4324,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-      }} />
+  //  <MapView
+  //  style={my_styles.map}
+  //    initialRegion = {{
+  //    latitude: 37.78825,
+  //    longitude: -122.4324,
+  //    latitudeDelta: 0.0922,
+  //    longitudeDelta: 0.0421,
+  //    }} />
 
+  //  <div>
+    <>
+
+    <TextInput
+    style = {{height: 40, borderColor: 'gray', borderWidth: 1}}
+    value = {'Enter address here'}
+    />
+
+    <Button
+    //onPress = {this._buttonPressed}
+    onPress = {() => {
+    console.log('the button has been pressed.');
+    }}
+    title='Go'
+    />
+
+    </>
+
+  //  </div>
 
   //    <StatusBar barStyle="dark-content" />
   //    <SafeAreaView>
