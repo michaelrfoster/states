@@ -1,3 +1,6 @@
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -116,6 +119,38 @@ try {
 
 };
 
+const HomeScreen = ({ navigation }) => {
+    return (
+
+    <>
+
+        <TextInput
+        style = {{height: 40, borderColor: 'gray', borderWidth: 1}}
+        value = {'Enter address here'}
+        />
+
+        <Button
+        //onPress = {this._buttonPressed}
+        onPress = {() => {
+        console.log('the button has been pressed.');
+        navigation.navigate('SelectionScreen');
+        }}
+        title='Go'
+        />
+
+        </>
+
+
+    );
+
+
+};
+const SelectionScreen = () => {
+    return <Text>Testing</Text>;
+};
+
+const Stack = createStackNavigator();
+
     request_location_permission();
 
 
@@ -128,6 +163,22 @@ try {
 
 const App: () => React$Node = () => {
   return (
+  <NavigationContainer>
+    <Stack.Navigator>
+
+        <Stack.Screen
+        name='Home'
+        component={HomeScreen}
+        />
+
+        <Stack.Screen
+        name='SelectionScreen'
+        component = {SelectionScreen}
+        />
+
+
+    </Stack.Navigator>
+  </NavigationContainer>
 
 
 
@@ -143,22 +194,22 @@ const App: () => React$Node = () => {
   //    }} />
 
   //  <div>
-    <>
+//    <>
 
-    <TextInput
-    style = {{height: 40, borderColor: 'gray', borderWidth: 1}}
-    value = {'Enter address here'}
-    />
+ //   <TextInput
+ //   style = {{height: 40, borderColor: 'gray', borderWidth: 1}}
+ //   value = {'Enter address here'}
+ //   />
 
-    <Button
+ //   <Button
     //onPress = {this._buttonPressed}
-    onPress = {() => {
-    console.log('the button has been pressed.');
-    }}
-    title='Go'
-    />
+//    onPress = {() => {
+//    console.log('the button has been pressed.');
+//    }}
+//    title='Go'
+//    />
 
-    </>
+ //   </>
 
   //  </div>
 
