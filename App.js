@@ -119,6 +119,21 @@ try {
 
 };
 
+function make_google_civic_api_call ()
+{
+fetch('https://www.googleapis.com/civicinfo/v2/voterinfo?address=5327 W Keefe Ave Milwaukee, Wisconsin, 53216?electionId=5009', {
+method: 'GET'
+})
+.then((response) => response.json())
+.then((responseJson) => {
+console.log('done');
+console.log(responseJson);
+})
+.catch((error) => {
+console.error(error);
+})
+}
+
 const HomeScreen = ({ navigation }) => {
     return (
 
@@ -146,7 +161,22 @@ const HomeScreen = ({ navigation }) => {
 
 };
 const SelectionScreen = () => {
-    return <Text>Testing</Text>;
+    return (
+//    make_google_civic_api_call (),
+    <>
+
+    <Text>Testing</Text>
+    <Button
+    title='See who is on my ballot'
+    />
+    <Button
+        title='View polling stations'
+        />
+
+
+    </>
+
+    );
 };
 
 const Stack = createStackNavigator();
