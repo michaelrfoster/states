@@ -1,3 +1,6 @@
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -10,6 +13,11 @@ import React from 'react';
 //import Styled from 'styled-components/native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
+
+//import _jquery from 'jquery';
+import $ from 'jquery';
+//import jquery.default.getJSON from 'jquery';
+// import {map_data} from './shapefile_data/topo_four.js';
 //const Container = Styled.View '
 //flex: 1;'
 //;
@@ -29,6 +37,8 @@ import {
   View,
   Text,
   StatusBar,
+  TextInput,
+  Button,
   PermissionsAndroid
 } from 'react-native';
 
@@ -46,6 +56,19 @@ map: {
 },
 });
 
+function load_map_data ()
+{
+  console.log("no errors yet");
+ // console.log()
+//  $.getJSON("shapefile_data/topo_four.json", function (data) {
+//  console.log("here 99");
+  //$.each(data, function (key, val) {
+  //console.log("here inner 44");
+  //});
+
+//  });
+}
+
 function get_location ()
 {
 //if (hasLocationPermission)
@@ -61,6 +84,11 @@ Geolocation.getCurrentPosition(
     );
 //    }
 
+}
+
+function buttonPressed ()
+{
+console.log('button pressed');
 }
 
 async function request_location_permission() {
@@ -91,29 +119,129 @@ try {
 
 };
 
+function make_google_civic_api_call ()
+{
+fetch('https://www.googleapis.com/civicinfo/v2/voterinfo?address=5327 W Keefe Ave Milwaukee, Wisconsin, 53216?electionId=5009', {
+method: 'GET'
+})
+.then((response) => response.json())
+.then((responseJson) => {
+console.log('done');
+console.log(responseJson);
+})
+.catch((error) => {
+console.error(error);
+})
+}
+
+const HomeScreen = ({ navigation }) => {
+    return (
+
+    <>
+
+        <TextInput
+        style = {{height: 40, borderColor: 'gray', borderWidth: 1}}
+        value = {'Enter address here'}
+        />
+
+        <Button
+        //onPress = {this._buttonPressed}
+        onPress = {() => {
+        console.log('the button has been pressed.');
+        navigation.navigate('SelectionScreen');
+        }}
+        title='Go'
+        />
+
+        </>
+
+
+    );
+
+
+};
+const SelectionScreen = () => {
+    return (
+//    make_google_civic_api_call (),
+    <>
+
+    <Text>Testing</Text>
+    <Button
+    title='See who is on my ballot'
+    />
+    <Button
+        title='View polling stations'
+        />
+
+
+    </>
+
+    );
+};
+
+const Stack = createStackNavigator();
+
     request_location_permission();
 
 
     console.log("tag9999999994444444");
     get_location();
 
+    console.log("new stuff");
+    load_map_data();
+
 
 const App: () => React$Node = () => {
   return (
+  <NavigationContainer>
+    <Stack.Navigator>
+
+        <Stack.Screen
+        name='Home'
+        component={HomeScreen}
+        />
+
+        <Stack.Screen
+        name='SelectionScreen'
+        component = {SelectionScreen}
+        />
+
+
+    </Stack.Navigator>
+  </NavigationContainer>
 
 
 
   //  <>
 
-    <MapView
-    style={my_styles.map}
-      initialRegion = {{
-      latitude: 37.78825,
-      longitude: -122.4324,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-      }} />
+  //  <MapView
+  //  style={my_styles.map}
+  //    initialRegion = {{
+  //    latitude: 37.78825,
+  //    longitude: -122.4324,
+  //    latitudeDelta: 0.0922,
+  //    longitudeDelta: 0.0421,
+  //    }} />
 
+  //  <div>
+//    <>
+
+ //   <TextInput
+ //   style = {{height: 40, borderColor: 'gray', borderWidth: 1}}
+ //   value = {'Enter address here'}
+ //   />
+
+ //   <Button
+    //onPress = {this._buttonPressed}
+//    onPress = {() => {
+//    console.log('the button has been pressed.');
+//    }}
+//    title='Go'
+//    />
+
+ //   </>
+
+  //  </div>
 
   //    <StatusBar barStyle="dark-content" />
   //    <SafeAreaView>
