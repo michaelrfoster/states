@@ -14,6 +14,10 @@ import React from 'react';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 
+import * as secret_key from './secret/secret_key.js';
+console.log('secret');
+//console.log(secret_key.secret_key);
+
 //import _jquery from 'jquery';
 import $ from 'jquery';
 //import jquery.default.getJSON from 'jquery';
@@ -55,6 +59,8 @@ map: {
 ...StyleSheet.absoluteFillObject,
 },
 });
+
+
 
 function load_map_data ()
 {
@@ -119,9 +125,17 @@ try {
 
 };
 
-function make_google_civic_api_call ()
+function make_google_civic_api_call (address_val)
 {
-fetch('https://www.googleapis.com/civicinfo/v2/voterinfo?address=5327 W Keefe Ave Milwaukee, Wisconsin, 53216?electionId=5009', {
+//var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo?address=5327 W Keefe Ave Milwaukee, Wisconsin, 53216?electionId=5009';
+//var fetch_string = 'https://www.googleapis.com/civicinfo/v2/elections';
+var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo';
+fetch_string = fetch_string + '?key=' + secret_key.secret_key;
+fetch_string = fetch_string + '?address=' + address_val;
+fetch_string = fetch_string + '?electionId=' + '4953';
+console.log('test');
+console.log(fetch_string);
+fetch(fetch_string, {
 method: 'GET'
 })
 .then((response) => response.json())
@@ -134,21 +148,35 @@ console.error(error);
 })
 }
 
+
+
 const HomeScreen = ({ navigation }) => {
+
+//const [value, onChangeText] = React.useState('UselessPlaceholder');
+
+const [value, onChangeText] = React.useState('109 Noble Dr, Belle Chasse, LA, 70037');
+
+
     return (
+
 
     <>
 
         <TextInput
         style = {{height: 40, borderColor: 'gray', borderWidth: 1}}
-        value = {'Enter address here'}
+        placeholder = 'Enter address here'
+        onChangeText = {text => onChangeText(text)}
+        value = {value}
+        id = 'address_field'
+
         />
 
         <Button
         //onPress = {this._buttonPressed}
         onPress = {() => {
         console.log('the button has been pressed.');
-        navigation.navigate('SelectionScreen');
+        console.log(value);
+        navigation.navigate('SelectionScreen', {address_val: value});
         }}
         title='Go'
         />
@@ -160,9 +188,15 @@ const HomeScreen = ({ navigation }) => {
 
 
 };
-const SelectionScreen = () => {
+const SelectionScreen = ({route, navigation}) => {
+
+    var address_val = route.params;
+    address_val = address_val.address_val;
+    console.log('here 27');
+    console.log(address_val);
+
     return (
-//    make_google_civic_api_call (),
+    make_google_civic_api_call (address_val),
     <>
 
     <Text>Testing</Text>
