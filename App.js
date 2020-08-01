@@ -245,7 +245,34 @@ const [json_value, on_request] = React.useState('testing');
     />
     <Button
         title='View polling stations'
-        />
+        onPress = {() => {
+
+        var location_strings = '';
+
+        for (const i in json_data.pollingLocations)
+        {
+        console.log('loop');
+        console.log(i);
+        locations_strings = location_strings + 'Location: ' + json_data.pollingLocations[i].address.locationName + '\n';
+        locations_strings = locations_strings + 'Address: ' + json_data.pollingLocations[i].address.line1;
+      //  locations_strings = locations_strings + json_data.pollingLocations[i].address.line2;
+      //  locations_strings = locations_strings + json_data.pollingLocations[i].address.line3;
+        locations_strings = locations_strings +  json_data.pollingLocations[i].address.city;
+        locations_strings = locations_strings +  json_data.pollingLocations[i].address.state;
+        locations_strings = locations_strings +  json_data.pollingLocations[i].address.zip;
+
+
+
+        }
+
+        console.log('9494');
+        console.log(locations_strings);
+
+
+                       navigation.navigate('PollingStations', {locations_strings: locations_strings});
+                        }}
+                />
+
         <Button
         title = 'Additional election resources'
         onPress = {() => {
@@ -262,19 +289,45 @@ const [json_value, on_request] = React.useState('testing');
     );
 };
 
+const PollingStations = ({route, navigation}) =>
+{
+var locations = route.params.locations_strings;
+
+console.log('all here!');
+
+
+
+
+console.log(locations);
+return (
+
+<>
+<Text>Here is a list of nearby polling stations</Text>
+<Text>{locations}</Text>
+
+</>
+
+)
+}
+
 const LinksScreen = ({route, navigation}) =>
 {
 var link_info = route.params.link_info;
 console.log('here 29');
 console.log(link_info);
+console.log('state here');
+console.log(link_info.state);
 
-var link_display_string = link_info.state.electionAdministrationBody;
+//var link_display_string = link_info.state.electionAdministrationBody;
+var link_display_string = link_info.state[0].electionAdministrationBody.electionInfoUrl;
 console.log(link_display_string);
 
 return (
+<>
+<Text>Here are some resources to help you find more information about the election!</Text>
 
-<Text>link_display_string</Text>
-
+<Text>{link_display_string}</Text>
+</>
 
 )
 
@@ -310,6 +363,11 @@ const App: () => React$Node = () => {
         <Stack.Screen
         name='LinksScreen'
         component = {LinksScreen}
+        />
+
+        <Stack.Screen
+        name = 'PollingStations'
+        component = {PollingStations}
         />
 
 
