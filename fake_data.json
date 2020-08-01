@@ -1,0 +1,61 @@
+{
+  "election": {
+    "id": "1337",
+    "name": "Fake Williamsburg Election",
+    "electionDay": "2020-08-04",
+    "ocdDivisionId": "ocd-division/country:us/state:va"
+  },
+  "normalizedInput":{
+    "line1": "100 Stadium Dr",
+    "city": "Williamsburg",
+    "state": "VA",
+    "zip": "23185"
+  },
+  "pollingLocations":[
+    {
+      "address": {
+        "locationName": "POLLING PLACE",
+        "line1": "1234 Polling Road",
+        "city": "Williamsburg",
+        "state": "VA",
+        "zip": "23185"
+      },
+      "notes": "IT DOESNT ACTUALLY EXIST",
+      "pollingHours": "Tue, Aug 4: 7 am - 8 pm",
+      "startDate": "2020-08-04",
+      "endDate": "2020-08-04",
+      "sources": [
+        {
+          "name": "My Imagination",
+          "official": true
+        }
+      ]
+    }
+  ],
+  "Contests":[
+    {
+      "type": "General",
+      "ballotTitle": "Senator",
+      "office": "SENATOR",
+      "level": [
+        "country"
+      ],
+      "candidates": [
+        {
+          "name": "Mark Warner",
+          "party": "Democrat",
+          "orderOnBallot": 1
+        },
+        {
+          "name": "Daniel Gade",
+          "party": "Republican",
+          "orderOnBallot": 2
+        }
+
+
+      ]
+    }
+
+  ]
+
+}
