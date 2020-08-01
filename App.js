@@ -125,14 +125,14 @@ try {
 
 };
 
-function make_google_civic_api_call (address_val)
+function make_google_civic_api_call (address_val, callback)
 {
 //var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo?address=5327 W Keefe Ave Milwaukee, Wisconsin, 53216?electionId=5009';
 //var fetch_string = 'https://www.googleapis.com/civicinfo/v2/elections';
 var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo';
-fetch_string = fetch_string + '?key=' + secret_key.secret_key;
 fetch_string = fetch_string + '?address=' + address_val;
-fetch_string = fetch_string + '?electionId=' + '4953';
+fetch_string = fetch_string + '&electionId=' + '4953';
+fetch_string = fetch_string + '&key=' + secret_key.secret_key;
 console.log('test');
 console.log(fetch_string);
 fetch(fetch_string, {
@@ -140,8 +140,18 @@ method: 'GET'
 })
 .then((response) => response.json())
 .then((responseJson) => {
-console.log('done');
+console.log('done with json request');
 console.log(responseJson);
+//console.log('object');
+//const json_obj = JSON.parse(responseJson);
+//console.log('state after stringify');
+//console.log(responseJson.state);
+//var stringified = JSON.stringify(responseJson);
+//console.log(stringified);
+
+//return stringified;
+callback(responseJson);
+
 })
 .catch((error) => {
 console.error(error);
@@ -174,8 +184,8 @@ const [value, onChangeText] = React.useState('109 Noble Dr, Belle Chasse, LA, 70
         <Button
         //onPress = {this._buttonPressed}
         onPress = {() => {
-        console.log('the button has been pressed.');
-        console.log(value);
+    //    console.log('the button has been pressed.');
+    //    console.log(value);
         navigation.navigate('SelectionScreen', {address_val: value});
         }}
         title='Go'
@@ -190,13 +200,43 @@ const [value, onChangeText] = React.useState('109 Noble Dr, Belle Chasse, LA, 70
 };
 const SelectionScreen = ({route, navigation}) => {
 
+const [json_value, on_request] = React.useState('testing');
+//response_json = '';
+
+
     var address_val = route.params;
     address_val = address_val.address_val;
     console.log('here 27');
     console.log(address_val);
 
+    var json_data = null;
+
+
+   // make_google_civic_api_call.then(json_value => on_request(json_value))
+    // response = await make_google_civic_api_call(address_val);
+   //  const response_hook = React.useState('error');
+   make_google_civic_api_call(address_val, function (response)
+   {
+   console.log('plz plz');
+   console.log(response);
+    () => on_request(json_value = response);
+    console.log('wombat');
+    console.log(json_value);
+
+    json_data = response;
+   }
+   );
+
+  //   console.log('here 999');
+  //   console.log(response);
+  //  console.log(response_json);
+
+
     return (
-    make_google_civic_api_call (address_val),
+
+
+ //   console.log('here 28000'),
+ //   console.log(response.state.electionAdministrationBody),
     <>
 
     <Text>Testing</Text>
@@ -206,12 +246,39 @@ const SelectionScreen = ({route, navigation}) => {
     <Button
         title='View polling stations'
         />
+        <Button
+        title = 'Additional election resources'
+        onPress = {() => {
+        console.log('not here');
+   //     console.log(response_hook);
+   //     console.log(response);
+               navigation.navigate('LinksScreen', {link_info: json_data});
+                }}
+        />
 
 
     </>
 
     );
 };
+
+const LinksScreen = ({route, navigation}) =>
+{
+var link_info = route.params.link_info;
+console.log('here 29');
+console.log(link_info);
+
+var link_display_string = link_info.state.electionAdministrationBody;
+console.log(link_display_string);
+
+return (
+
+<Text>link_display_string</Text>
+
+
+)
+
+}
 
 const Stack = createStackNavigator();
 
@@ -238,6 +305,11 @@ const App: () => React$Node = () => {
         <Stack.Screen
         name='SelectionScreen'
         component = {SelectionScreen}
+        />
+
+        <Stack.Screen
+        name='LinksScreen'
+        component = {LinksScreen}
         />
 
 
