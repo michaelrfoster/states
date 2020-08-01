@@ -254,11 +254,11 @@ const [json_value, on_request] = React.useState('testing');
         console.log('loop');
         console.log(i);
         locations_strings = location_strings + 'Location: ' + json_data.pollingLocations[i].address.locationName + '\n';
-        locations_strings = locations_strings + 'Address: ' + json_data.pollingLocations[i].address.line1;
+        locations_strings = locations_strings + 'Address: ' + json_data.pollingLocations[i].address.line1 + ', ';
       //  locations_strings = locations_strings + json_data.pollingLocations[i].address.line2;
       //  locations_strings = locations_strings + json_data.pollingLocations[i].address.line3;
-        locations_strings = locations_strings +  json_data.pollingLocations[i].address.city;
-        locations_strings = locations_strings +  json_data.pollingLocations[i].address.state;
+        locations_strings = locations_strings +  json_data.pollingLocations[i].address.city + ', ';
+        locations_strings = locations_strings +  json_data.pollingLocations[i].address.state + ', ';
         locations_strings = locations_strings +  json_data.pollingLocations[i].address.zip;
 
 
@@ -321,12 +321,15 @@ console.log(link_info.state);
 //var link_display_string = link_info.state.electionAdministrationBody;
 var link_display_string = link_info.state[0].electionAdministrationBody.electionInfoUrl;
 console.log(link_display_string);
+//console.log('abs');
+//console.log(link_info.state[0].electionAdministrationBody.absenteeVotingInfoUrl);
+//console.log(link_info.state[0].electionAdministrationBody);
 
 return (
 <>
 <Text>Here are some resources to help you find more information about the election!</Text>
 
-<Text>{link_display_string}</Text>
+<Text>General election info: {link_display_string}</Text>
 </>
 
 )
