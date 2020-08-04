@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -26,8 +26,6 @@ import $ from 'jquery';
 //flex: 1;'
 //;
 
-
-
 //const GoogleMap = () => {
 //return (<Container>
 //<MapView style={{flex: 1}} provider = {PROVIDER_GOOGLE} />
@@ -43,7 +41,7 @@ import {
   StatusBar,
   TextInput,
   Button,
-  PermissionsAndroid
+  PermissionsAndroid,
 } from 'react-native';
 
 import {
@@ -55,403 +53,351 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 const my_styles = StyleSheet.create({
-map: {
-...StyleSheet.absoluteFillObject,
-},
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
 });
 
-
-
-function load_map_data ()
-{
-  console.log("no errors yet");
- // console.log()
-//  $.getJSON("shapefile_data/topo_four.json", function (data) {
-//  console.log("here 99");
-  //$.each(data, function (key, val) {
-  //console.log("here inner 44");
-  //});
-
-//  });
+function load_map_data() {
+  console.log('no errors yet');
+  // console.log()
+  // $.getJSON("shapefile_data/topo_four.json", function (data) {
+  //   console.log("here 99");
+  //   $.each(data, function (key, val) {
+  //     console.log("here inner 44");
+  //   });
+  // });
 }
 
-function get_location ()
-{
-//if (hasLocationPermission)
-//{
-Geolocation.getCurrentPosition(
-    (position) => {
-    console.log(position);
+function get_location() {
+  // if (hasLocationPermission)
+  // {
+  Geolocation.getCurrentPosition(
+    position => {
+      console.log(position);
     },
-    (error) => {
-        console.log(error.code, error.message);
+    error => {
+      console.log(error.code, error.message);
     },
-    {enableHighAccuracy: true, timeout: 15000, maximumAge: 1000}
-    );
-//    }
-
+    {enableHighAccuracy: true, timeout: 15000, maximumAge: 1000},
+  );
+  // }
 }
 
-function buttonPressed ()
-{
-console.log('button pressed');
+function buttonPressed() {
+  console.log('button pressed');
 }
 
 async function request_location_permission() {
-try {
-    const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    {
-    title: "Give location permission",
-    message: "Let us know your location, so we can best help you!",
-    buttonNegative: "Cancel",
-    buttonPositive: "OK"
-    }
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: 'Give location permission',
+        message: 'Let us know your location, so we can best help you!',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
     );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED)
-    {
-    console.log("granted");
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log('granted');
 
-        console.log("we are here");
-        get_location();
+      console.log('we are here');
+      get_location();
+    } else {
+      console.log('denied');
     }
-    else
-    {
-    console.log("denied");
-    }
-    }
-    catch (err) { console.warn(err); }
-
-
-
-};
-
-function make_google_civic_api_call (address_val, callback)
-{
-//var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo?address=5327 W Keefe Ave Milwaukee, Wisconsin, 53216?electionId=5009';
-//var fetch_string = 'https://www.googleapis.com/civicinfo/v2/elections';
-var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo';
-fetch_string = fetch_string + '?address=' + address_val;
-fetch_string = fetch_string + '&electionId=' + '4953';
-fetch_string = fetch_string + '&key=' + secret_key.secret_key;
-console.log('test');
-console.log(fetch_string);
-fetch(fetch_string, {
-method: 'GET'
-})
-.then((response) => response.json())
-.then((responseJson) => {
-console.log('done with json request');
-console.log(responseJson);
-//console.log('object');
-//const json_obj = JSON.parse(responseJson);
-//console.log('state after stringify');
-//console.log(responseJson.state);
-//var stringified = JSON.stringify(responseJson);
-//console.log(stringified);
-
-//return stringified;
-callback(responseJson);
-
-})
-.catch((error) => {
-console.error(error);
-})
+  } catch (err) {
+    console.warn(err);
+  }
 }
 
+function make_google_civic_api_call(address_val, callback) {
+  // var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo?address=5327 W Keefe Ave Milwaukee, Wisconsin, 53216?electionId=5009';
+  // var fetch_string = 'https://www.googleapis.com/civicinfo/v2/elections';
+  var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo';
+  fetch_string = fetch_string + '?address=' + address_val;
+  fetch_string = fetch_string + '&electionId=' + '4953';
+  fetch_string = fetch_string + '&key=' + secret_key.secret_key;
+  console.log('test');
+  console.log(fetch_string);
+  fetch(fetch_string, {
+    method: 'GET',
+  })
+    .then(response => response.json())
+    .then(responseJson => {
+      console.log('done with json request');
+      console.log(responseJson);
+      // console.log('object');
+      // const json_obj = JSON.parse(responseJson);
+      // console.log('state after stringify');
+      // console.log(responseJson.state);
+      // var stringified = JSON.stringify(responseJson);
+      // console.log(stringified);
 
+      // return stringified;
+      callback(responseJson);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({navigation}) => {
+  // const [value, onChangeText] = React.useState('UselessPlaceholder');
 
-//const [value, onChangeText] = React.useState('UselessPlaceholder');
+  const [value, onChangeText] = React.useState(
+    '109 Noble Dr, Belle Chasse, LA, 70037',
+  );
 
-const [value, onChangeText] = React.useState('109 Noble Dr, Belle Chasse, LA, 70037');
-
-
-    return (
-
-
+  return (
     <>
+      <TextInput
+        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        placeholder="Enter address here"
+        onChangeText={text => onChangeText(text)}
+        value={value}
+        id="address_field"
+      />
 
-        <TextInput
-        style = {{height: 40, borderColor: 'gray', borderWidth: 1}}
-        placeholder = 'Enter address here'
-        onChangeText = {text => onChangeText(text)}
-        value = {value}
-        id = 'address_field'
-
-        />
-
-        <Button
-        //onPress = {this._buttonPressed}
-        onPress = {() => {
-    //    console.log('the button has been pressed.');
-    //    console.log(value);
-        navigation.navigate('SelectionScreen', {address_val: value});
+      <Button
+        // onPress = {this._buttonPressed}
+        onPress={() => {
+          // console.log('the button has been pressed.');
+          // console.log(value);
+          navigation.navigate('SelectionScreen', {address_val: value});
         }}
-        title='Go'
-        />
-
-        </>
-
-
-    );
-
-
+        title="Go"
+      />
+    </>
+  );
 };
 const SelectionScreen = ({route, navigation}) => {
+  const [json_value, on_request] = React.useState('testing');
+  // response_json = '';
 
-const [json_value, on_request] = React.useState('testing');
-//response_json = '';
+  var address_val = route.params;
+  address_val = address_val.address_val;
+  console.log('here 27');
+  console.log(address_val);
 
+  var json_data = null;
 
-    var address_val = route.params;
-    address_val = address_val.address_val;
-    console.log('here 27');
-    console.log(address_val);
-
-    var json_data = null;
-
-
-   // make_google_civic_api_call.then(json_value => on_request(json_value))
-    // response = await make_google_civic_api_call(address_val);
-   //  const response_hook = React.useState('error');
-   make_google_civic_api_call(address_val, function (response)
-   {
-   console.log('plz plz');
-   console.log(response);
-    () => on_request(json_value = response);
+  // make_google_civic_api_call.then(json_value => on_request(json_value))
+  // response = await make_google_civic_api_call(address_val);
+  // const response_hook = React.useState('error');
+  make_google_civic_api_call(address_val, function(response) {
+    console.log('plz plz');
+    console.log(response);
+    () => on_request((json_value = response));
     console.log('wombat');
     console.log(json_value);
 
     json_data = response;
-   }
-   );
+  });
 
-  //   console.log('here 999');
-  //   console.log(response);
-  //  console.log(response_json);
+  // console.log('here 999');
+  // console.log(response);
+  // console.log(response_json);
 
-
-    return (
-
-
- //   console.log('here 28000'),
- //   console.log(response.state.electionAdministrationBody),
+  return (
+    // console.log('here 28000'),
+    // console.log(response.state.electionAdministrationBody),
     <>
+      <Text>Testing</Text>
+      <Button title="See who is on my ballot" />
+      <Button
+        title="View polling stations"
+        onPress={() => {
+          var location_strings = '';
 
-    <Text>Testing</Text>
-    <Button
-    title='See who is on my ballot'
-    />
-    <Button
-        title='View polling stations'
-        onPress = {() => {
+          for (const i in json_data.pollingLocations) {
+            console.log('loop');
+            console.log(i);
+            var locations_strings =
+              location_strings +
+              'Location: ' +
+              json_data.pollingLocations[i].address.locationName +
+              '\n';
+            locations_strings =
+              locations_strings +
+              'Address: ' +
+              json_data.pollingLocations[i].address.line1 +
+              ', ';
+            // locations_strings = locations_strings + json_data.pollingLocations[i].address.line2;
+            // locations_strings = locations_strings + json_data.pollingLocations[i].address.line3;
+            locations_strings =
+              locations_strings +
+              json_data.pollingLocations[i].address.city +
+              ', ';
+            locations_strings =
+              locations_strings +
+              json_data.pollingLocations[i].address.state +
+              ', ';
+            locations_strings =
+              locations_strings + json_data.pollingLocations[i].address.zip;
+          }
 
-        var location_strings = '';
+          console.log('9494');
+          console.log(locations_strings);
 
-        for (const i in json_data.pollingLocations)
-        {
-        console.log('loop');
-        console.log(i);
-        locations_strings = location_strings + 'Location: ' + json_data.pollingLocations[i].address.locationName + '\n';
-        locations_strings = locations_strings + 'Address: ' + json_data.pollingLocations[i].address.line1 + ', ';
-      //  locations_strings = locations_strings + json_data.pollingLocations[i].address.line2;
-      //  locations_strings = locations_strings + json_data.pollingLocations[i].address.line3;
-        locations_strings = locations_strings +  json_data.pollingLocations[i].address.city + ', ';
-        locations_strings = locations_strings +  json_data.pollingLocations[i].address.state + ', ';
-        locations_strings = locations_strings +  json_data.pollingLocations[i].address.zip;
+          navigation.navigate('PollingStations', {
+            locations_strings: locations_strings,
+          });
+        }}
+      />
 
-
-
-        }
-
-        console.log('9494');
-        console.log(locations_strings);
-
-
-                       navigation.navigate('PollingStations', {locations_strings: locations_strings});
-                        }}
-                />
-
-        <Button
-        title = 'Additional election resources'
-        onPress = {() => {
-        console.log('not here');
-   //     console.log(response_hook);
-   //     console.log(response);
-               navigation.navigate('LinksScreen', {link_info: json_data});
-                }}
-        />
-
-
+      <Button
+        title="Additional election resources"
+        onPress={() => {
+          console.log('not here');
+          // console.log(response_hook);
+          // console.log(response);
+          navigation.navigate('LinksScreen', {link_info: json_data});
+        }}
+      />
     </>
-
-    );
+  );
 };
 
-const PollingStations = ({route, navigation}) =>
-{
-var locations = route.params.locations_strings;
+const PollingStations = ({route, navigation}) => {
+  var locations = route.params.locations_strings;
 
-console.log('all here!');
+  console.log('all here!');
 
+  console.log(locations);
+  return (
+    <>
+      <Text>Here is a list of nearby polling stations</Text>
+      <Text>{locations}</Text>
+    </>
+  );
+};
 
+const LinksScreen = ({route, navigation}) => {
+  var link_info = route.params.link_info;
+  console.log('here 29');
+  console.log(link_info);
+  console.log('state here');
+  console.log(link_info.state);
 
+  // var link_display_string = link_info.state.electionAdministrationBody;
+  var link_display_string =
+    link_info.state[0].electionAdministrationBody.electionInfoUrl;
+  console.log(link_display_string);
+  // console.log('abs');
+  // console.log(link_info.state[0].electionAdministrationBody.absenteeVotingInfoUrl);
+  // console.log(link_info.state[0].electionAdministrationBody);
 
-console.log(locations);
-return (
+  return (
+    <>
+      <Text>
+        Here are some resources to help you find more information about the
+        election!
+      </Text>
 
-<>
-<Text>Here is a list of nearby polling stations</Text>
-<Text>{locations}</Text>
-
-</>
-
-)
-}
-
-const LinksScreen = ({route, navigation}) =>
-{
-var link_info = route.params.link_info;
-console.log('here 29');
-console.log(link_info);
-console.log('state here');
-console.log(link_info.state);
-
-//var link_display_string = link_info.state.electionAdministrationBody;
-var link_display_string = link_info.state[0].electionAdministrationBody.electionInfoUrl;
-console.log(link_display_string);
-//console.log('abs');
-//console.log(link_info.state[0].electionAdministrationBody.absenteeVotingInfoUrl);
-//console.log(link_info.state[0].electionAdministrationBody);
-
-return (
-<>
-<Text>Here are some resources to help you find more information about the election!</Text>
-
-<Text>General election info: {link_display_string}</Text>
-</>
-
-)
-
-}
+      <Text>General election info: {link_display_string}</Text>
+    </>
+  );
+};
 
 const Stack = createStackNavigator();
 
-    request_location_permission();
+request_location_permission();
 
+console.log('tag9999999994444444');
+get_location();
 
-    console.log("tag9999999994444444");
-    get_location();
+console.log('new stuff');
+load_map_data();
 
-    console.log("new stuff");
-    load_map_data();
-
-
-const App: () => React$Node = () => {
+const App = () => {
   return (
-  <NavigationContainer>
-    <Stack.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
 
-        <Stack.Screen
-        name='Home'
-        component={HomeScreen}
-        />
+        <Stack.Screen name="SelectionScreen" component={SelectionScreen} />
 
-        <Stack.Screen
-        name='SelectionScreen'
-        component = {SelectionScreen}
-        />
+        <Stack.Screen name="LinksScreen" component={LinksScreen} />
 
-        <Stack.Screen
-        name='LinksScreen'
-        component = {LinksScreen}
-        />
+        <Stack.Screen name="PollingStations" component={PollingStations} />
+      </Stack.Navigator>
+    </NavigationContainer>
 
-        <Stack.Screen
-        name = 'PollingStations'
-        component = {PollingStations}
-        />
+    //  <>
 
+    //  <MapView
+    //  style={my_styles.map}
+    //    initialRegion = {{
+    //    latitude: 37.78825,
+    //    longitude: -122.4324,
+    //    latitudeDelta: 0.0922,
+    //    longitudeDelta: 0.0421,
+    //    }} />
 
-    </Stack.Navigator>
-  </NavigationContainer>
+    //  <div>
+    //    <>
 
+    //   <TextInput
+    //   style = {{height: 40, borderColor: 'gray', borderWidth: 1}}
+    //   value = {'Enter address here'}
+    //   />
 
-
-  //  <>
-
-  //  <MapView
-  //  style={my_styles.map}
-  //    initialRegion = {{
-  //    latitude: 37.78825,
-  //    longitude: -122.4324,
-  //    latitudeDelta: 0.0922,
-  //    longitudeDelta: 0.0421,
-  //    }} />
-
-  //  <div>
-//    <>
-
- //   <TextInput
- //   style = {{height: 40, borderColor: 'gray', borderWidth: 1}}
- //   value = {'Enter address here'}
- //   />
-
- //   <Button
+    //   <Button
     //onPress = {this._buttonPressed}
-//    onPress = {() => {
-//    console.log('the button has been pressed.');
-//    }}
-//    title='Go'
-//    />
+    //    onPress = {() => {
+    //    console.log('the button has been pressed.');
+    //    }}
+    //    title='Go'
+    //    />
 
- //   </>
+    //   </>
 
-  //  </div>
+    //  </div>
 
-  //    <StatusBar barStyle="dark-content" />
-  //    <SafeAreaView>
-  //      <ScrollView
-  //        contentInsetAdjustmentBehavior="automatic"
-  //        style={styles.scrollView}>
-  //        <Header />
-  //        {global.HermesInternal == null ? null : (
-//            <View style={styles.engine}>
-//              <Text style={styles.footer}>Engine: Hermes</Text>
-//            </View>
-//          )}
-//          <View style={styles.body}>
-//            <View style={styles.sectionContainer}>
-//              <Text style={styles.sectionTitle}>Step One</Text>
-//              <Text style={styles.sectionDescription}>
-//                Edit <Text style={styles.highlight}>App.js</Text> to change this
-//                screen and then come back to see your edits. Hi I did something! lol
-//              </Text>
-//            </View>
-//            <View style={styles.sectionContainer}>
-//              <Text style={styles.sectionTitle}>See Your Changes</Text>
-//              <Text style={styles.sectionDescription}>
-//                <ReloadInstructions />
-//              </Text>
-//            </View>
-//            <View style={styles.sectionContainer}>
-//              <Text style={styles.sectionTitle}>Debug</Text>
-//              <Text style={styles.sectionDescription}>
-//                <DebugInstructions />
-//              </Text>
-//            </View>
-//            <View style={styles.sectionContainer}>
-//              <Text style={styles.sectionTitle}>Learn More</Text>
-//              <Text style={styles.sectionDescription}>
-//                Read the docs to discover what to do next:
-//              </Text>
-//            </View>
-//            <LearnMoreLinks />
-//          </View>
-//        </ScrollView>
-//      </SafeAreaView>
-//   </>
+    //    <StatusBar barStyle="dark-content" />
+    //    <SafeAreaView>
+    //      <ScrollView
+    //        contentInsetAdjustmentBehavior="automatic"
+    //        style={styles.scrollView}>
+    //        <Header />
+    //        {global.HermesInternal == null ? null : (
+    //            <View style={styles.engine}>
+    //              <Text style={styles.footer}>Engine: Hermes</Text>
+    //            </View>
+    //          )}
+    //          <View style={styles.body}>
+    //            <View style={styles.sectionContainer}>
+    //              <Text style={styles.sectionTitle}>Step One</Text>
+    //              <Text style={styles.sectionDescription}>
+    //                Edit <Text style={styles.highlight}>App.js</Text> to change this
+    //                screen and then come back to see your edits. Hi I did something! lol
+    //              </Text>
+    //            </View>
+    //            <View style={styles.sectionContainer}>
+    //              <Text style={styles.sectionTitle}>See Your Changes</Text>
+    //              <Text style={styles.sectionDescription}>
+    //                <ReloadInstructions />
+    //              </Text>
+    //            </View>
+    //            <View style={styles.sectionContainer}>
+    //              <Text style={styles.sectionTitle}>Debug</Text>
+    //              <Text style={styles.sectionDescription}>
+    //                <DebugInstructions />
+    //              </Text>
+    //            </View>
+    //            <View style={styles.sectionContainer}>
+    //              <Text style={styles.sectionTitle}>Learn More</Text>
+    //              <Text style={styles.sectionDescription}>
+    //                Read the docs to discover what to do next:
+    //              </Text>
+    //            </View>
+    //            <LearnMoreLinks />
+    //          </View>
+    //        </ScrollView>
+    //      </SafeAreaView>
+    //   </>
   );
 };
 

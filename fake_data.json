@@ -5,13 +5,13 @@
     "electionDay": "2020-08-04",
     "ocdDivisionId": "ocd-division/country:us/state:va"
   },
-  "normalizedInput":{
+  "normalizedInput": {
     "line1": "100 Stadium Dr",
     "city": "Williamsburg",
     "state": "VA",
     "zip": "23185"
   },
-  "pollingLocations":[
+  "pollingLocations": [
     {
       "address": {
         "locationName": "POLLING PLACE",
@@ -32,7 +32,7 @@
       ]
     }
   ],
-  "Contests":[
+  "Contests": [
     {
       "type": "General",
       "ballotTitle": "Senator",
@@ -51,11 +51,7 @@
           "party": "Republican",
           "orderOnBallot": 2
         }
-
-
       ]
     }
-
   ]
-
 }
