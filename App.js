@@ -5,6 +5,7 @@
  * @format
  * @flow strict-local
  */
+'use strict';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -48,6 +49,10 @@ function make_google_civic_api_call(address_val, callback) {
     });
 }
 
+function make_fake_data_call(address_val, callback) {
+  console.log('you asked for fake data');
+  callback(fake_data);
+}
 //****************************************************************************************************************************************
 //*  HomeScreen: Get the address from the user. Uses the address to get information from API and pass that on for other screens to use.  *
 //****************************************************************************************************************************************
@@ -88,7 +93,11 @@ const SelectionScreen = ({route, navigation}) => {
 
   var json_data;
 
-  make_google_civic_api_call(address_val, function(response) {
+  /*make_google_civic_api_call(address_val, function(response) {
+    json_data = response;
+  });*/
+
+  make_fake_data_call(address_val, response => {
     json_data = response;
   });
 

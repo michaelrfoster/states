@@ -32,7 +32,7 @@
       ]
     }
   ],
-  "Contests": [
+  "contests": [
     {
       "type": "General",
       "ballotTitle": "Senator",
@@ -52,6 +52,23 @@
           "orderOnBallot": 2
         }
       ]
+    }
+  ],
+  "state": [
+    {
+      "name": "Virginia",
+      "electionAdministrationBody": {
+        "name": "Virginia Secretary of State",
+        "electionInfoUrl": "http://www.fakesite.gov/electionsandvoting",
+        "votingLocationFinderUrl": "https://voterportal.fakeplace.gov/",
+        "ballotInfoUrl": "https://voterportal.fakeplace.gov/",
+        "correspondenceAddress": {
+          "line1": "P.o. Box 42069",
+          "city": "Memesville",
+          "state": "Virginia",
+          "zip": "99999"
+        }
+      }
     }
   ]
 }
