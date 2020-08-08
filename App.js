@@ -108,6 +108,34 @@ const SelectionScreen = ({route, navigation}) => {
         title="See who is on my ballot"
         onPress={() => {
           console.log('not implemented');
+          var candidate_strings = '';
+
+          for (var i in json_data.contests)
+          {
+          console.log('candidate loop');
+          console.log(i);
+          console.log(json_data.contests[i]);
+          console.log(json_data.contests[i].candidates);
+
+          candidate_strings = candidate_strings + 'Office: ' + json_data.contests[i].office + '\n';
+
+          for (var j in json_data.contests[i].candidates)
+          {
+            candidate_strings = candidate_strings + json_data.contests[i].candidates[j].name;
+            candidate_strings = candidate_strings + ' - ' + json_data.contests[i].candidates[j].party + '\n';
+
+            console.log('here77');
+            console.log(json_data.contests[i].candidates[j].party);
+          }
+
+          }
+
+          console.log('candidate string: ');
+          console.log(candidate_strings);
+
+          navigation.navigate('CandidatesScreen', {candidate_strings: candidate_strings});
+
+
         }}
       />
       <Button
@@ -159,6 +187,25 @@ const SelectionScreen = ({route, navigation}) => {
     </View>
   );
 };
+
+//*******************************************************************
+//*  CandidatesScreen: Displays the candidates on the ballot  *
+//*******************************************************************
+
+const CandidatesScreen = ({route, navigation}) =>
+{
+var candidate_strings = route.params.candidate_strings;
+console.log('here 22');
+console.log(candidate_strings);
+return (
+<View>
+<Text>Here is a list of the candidates on your ballot</Text>
+<Text>{candidate_strings}</Text>
+</View>
+);
+
+}
+
 
 //*******************************************************************
 //*  PollingStations: Get the polling station(s) and display them.  *
@@ -222,6 +269,9 @@ const App = () => {
         <Stack.Screen name="LinksScreen" component={LinksScreen} />
 
         <Stack.Screen name="PollingStations" component={PollingStations} />
+
+        <Stack.Screen name="CandidatesScreen" component = {CandidatesScreen}/>
+
       </Stack.Navigator>
     </NavigationContainer>
   );
