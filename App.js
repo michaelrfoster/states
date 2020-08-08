@@ -173,7 +173,7 @@ const SelectionScreen = ({route, navigation}) => {
           console.log('9494');
           console.log(locations_strings);
 
-          navigation.navigate('PollingStations', {locations_strings: locations_strings});
+          navigation.navigate('PollingScreen', {locations_strings: locations_strings});
         }}
       />
 
@@ -208,10 +208,10 @@ return (
 
 
 //*******************************************************************
-//*  PollingStations: Get the polling station(s) and display them.  *
+//*  PollingScreen: Get the polling station(s) and display them.  *
 //*******************************************************************
 
-const PollingStations = ({route, navigation}) => {
+const PollingScreen = ({route, navigation}) => {
   var locations = route.params.locations_strings;
 
   console.log('all here!');
@@ -268,7 +268,7 @@ const App = () => {
 
         <Stack.Screen name="LinksScreen" component={LinksScreen} />
 
-        <Stack.Screen name="PollingStations" component={PollingStations} />
+        <Stack.Screen name="PollingScreen" component={PollingScreen} />
 
         <Stack.Screen name="CandidatesScreen" component = {CandidatesScreen}/>
 
