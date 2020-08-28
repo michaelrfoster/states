@@ -18,6 +18,8 @@ console.log('key=' + secret_key);
 import * as fake_data from './fake_data.json';
 console.log('fake_data=', fake_data);
 
+import HomeScreen from './HomeScreen.js';
+
 function make_google_civic_api_call(address_val, callback) {
   // var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo?address=5327 W Keefe Ave Milwaukee, Wisconsin, 53216?electionId=5009';
   // var fetch_string = 'https://www.googleapis.com/civicinfo/v2/elections';
@@ -53,34 +55,6 @@ function make_fake_data_call(address_val, callback) {
   console.log('you asked for fake data');
   callback(fake_data);
 }
-//****************************************************************************************************************************************
-//*  HomeScreen: Get the address from the user. Uses the address to get information from API and pass that on for other screens to use.  *
-//****************************************************************************************************************************************
-
-const HomeScreen = ({navigation}) => {
-  const [value, onChangeText] = React.useState(
-    '109 Noble Dr, Belle Chasse, LA, 70037',
-  );
-
-  return (
-    <View>
-      <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        placeholder="Enter address here"
-        onChangeText={text => onChangeText(text)}
-        value={value}
-        id="address_field"
-      />
-
-      <Button
-        onPress={() => {
-          navigation.navigate('SelectionScreen', {address_val: value});
-        }}
-        title="Go"
-      />
-    </View>
-  );
-};
 
 //******************************************************
 //*  SelectionScreen: Holds buttons to other screens.  *
@@ -110,32 +84,38 @@ const SelectionScreen = ({route, navigation}) => {
           console.log('not implemented');
           var candidate_strings = '';
 
-          for (var i in json_data.contests)
-          {
-          console.log('candidate loop');
-          console.log(i);
-          console.log(json_data.contests[i]);
-          console.log(json_data.contests[i].candidates);
+          for (var i in json_data.contests) {
+            console.log('candidate loop');
+            console.log(i);
+            console.log(json_data.contests[i]);
+            console.log(json_data.contests[i].candidates);
 
-          candidate_strings = candidate_strings + 'Office: ' + json_data.contests[i].office + '\n';
+            candidate_strings =
+              candidate_strings +
+              'Office: ' +
+              json_data.contests[i].office +
+              '\n';
 
-          for (var j in json_data.contests[i].candidates)
-          {
-            candidate_strings = candidate_strings + json_data.contests[i].candidates[j].name;
-            candidate_strings = candidate_strings + ' - ' + json_data.contests[i].candidates[j].party + '\n';
+            for (var j in json_data.contests[i].candidates) {
+              candidate_strings =
+                candidate_strings + json_data.contests[i].candidates[j].name;
+              candidate_strings =
+                candidate_strings +
+                ' - ' +
+                json_data.contests[i].candidates[j].party +
+                '\n';
 
-            console.log('here77');
-            console.log(json_data.contests[i].candidates[j].party);
-          }
-
+              console.log('here77');
+              console.log(json_data.contests[i].candidates[j].party);
+            }
           }
 
           console.log('candidate string: ');
           console.log(candidate_strings);
 
-          navigation.navigate('CandidatesScreen', {candidate_strings: candidate_strings});
-
-
+          navigation.navigate('CandidatesScreen', {
+            candidate_strings: candidate_strings,
+          });
         }}
       />
       <Button
@@ -173,7 +153,9 @@ const SelectionScreen = ({route, navigation}) => {
           console.log('9494');
           console.log(locations_strings);
 
-          navigation.navigate('PollingScreen', {locations_strings: locations_strings});
+          navigation.navigate('PollingScreen', {
+            locations_strings: locations_strings,
+          });
         }}
       />
 
@@ -188,28 +170,25 @@ const SelectionScreen = ({route, navigation}) => {
   );
 };
 
-//*******************************************************************
+//*************************************************************
 //*  CandidatesScreen: Displays the candidates on the ballot  *
-//*******************************************************************
+//*************************************************************
 
-const CandidatesScreen = ({route, navigation}) =>
-{
-var candidate_strings = route.params.candidate_strings;
-console.log('here 22');
-console.log(candidate_strings);
-return (
-<View>
-<Text>Here is a list of the candidates on your ballot</Text>
-<Text>{candidate_strings}</Text>
-</View>
-);
+const CandidatesScreen = ({route, navigation}) => {
+  var candidate_strings = route.params.candidate_strings;
+  console.log('here 22');
+  console.log(candidate_strings);
+  return (
+    <View>
+      <Text>Here is a list of the candidates on your ballot</Text>
+      <Text>{candidate_strings}</Text>
+    </View>
+  );
+};
 
-}
-
-
-//*******************************************************************
+//*****************************************************************
 //*  PollingScreen: Get the polling station(s) and display them.  *
-//*******************************************************************
+//*****************************************************************
 
 const PollingScreen = ({route, navigation}) => {
   var locations = route.params.locations_strings;
@@ -270,8 +249,7 @@ const App = () => {
 
         <Stack.Screen name="PollingScreen" component={PollingScreen} />
 
-        <Stack.Screen name="CandidatesScreen" component = {CandidatesScreen}/>
-
+        <Stack.Screen name="CandidatesScreen" component={CandidatesScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
