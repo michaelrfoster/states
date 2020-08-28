@@ -10,7 +10,7 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {View, Text, TextInput, Button} from 'react-native';
+import {View, Text, Button} from 'react-native';
 
 import {secret_key} from './secret/secret_key.js';
 console.log('key=' + secret_key);
@@ -19,7 +19,9 @@ import * as fake_data from './fake_data.json';
 console.log('fake_data=', fake_data);
 
 import HomeScreen from './HomeScreen.js';
+import CandidatesScreen from './CandidatesScreen.js';
 
+// eslint-disable-next-line no-unused-vars
 function make_google_civic_api_call(address_val, callback) {
   // var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo?address=5327 W Keefe Ave Milwaukee, Wisconsin, 53216?electionId=5009';
   // var fetch_string = 'https://www.googleapis.com/civicinfo/v2/elections';
@@ -166,22 +168,6 @@ const SelectionScreen = ({route, navigation}) => {
           navigation.navigate('LinksScreen', {link_info: json_data});
         }}
       />
-    </View>
-  );
-};
-
-//*************************************************************
-//*  CandidatesScreen: Displays the candidates on the ballot  *
-//*************************************************************
-
-const CandidatesScreen = ({route, navigation}) => {
-  var candidate_strings = route.params.candidate_strings;
-  console.log('here 22');
-  console.log(candidate_strings);
-  return (
-    <View>
-      <Text>Here is a list of the candidates on your ballot</Text>
-      <Text>{candidate_strings}</Text>
     </View>
   );
 };
