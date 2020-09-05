@@ -10,7 +10,7 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {View, Text, TextInput, Button} from 'react-native';
+import {View, Text, TextInput, Button, SafeAreaView, StyleSheet, SectionList} from 'react-native';
 
 import {secret_key} from './secret/secret_key.js';
 console.log('key=' + secret_key);
@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
     },
+    title: {
+      fontSize: 24
+    }
 
 })
 
@@ -141,33 +144,33 @@ const SelectionScreen = ({route, navigation}) => {
         title="See who is on my ballot"
         onPress={() => {
           console.log('not implemented');
-          var candidate_strings = '';
+//          var candidate_strings = '';
 
-          for (var i in json_data.contests)
-          {
-          console.log('candidate loop');
-          console.log(i);
-          console.log(json_data.contests[i]);
-          console.log(json_data.contests[i].candidates);
+//          for (var i in json_data.contests)
+//          {
+//          console.log('candidate loop');
+//          console.log(i);
+//          console.log(json_data.contests[i]);
+//          console.log(json_data.contests[i].candidates);
 
-          candidate_strings = candidate_strings + 'Office: ' + json_data.contests[i].office + '\n';
+  //        candidate_strings = candidate_strings + 'Office: ' + json_data.contests[i].office + '\n';
 
-          for (var j in json_data.contests[i].candidates)
-          {
-            candidate_strings = candidate_strings + json_data.contests[i].candidates[j].name;
-            candidate_strings = candidate_strings + ' - ' + json_data.contests[i].candidates[j].party + '\n';
+  //        for (var j in json_data.contests[i].candidates)
+  //        {
+   //         candidate_strings = candidate_strings + json_data.contests[i].candidates[j].name;
+    //        candidate_strings = candidate_strings + ' - ' + json_data.contests[i].candidates[j].party + '\n';
 
-            console.log('here77');
-            console.log(json_data.contests[i].candidates[j].party);
-          }
+      //      console.log('here77');
+      //      console.log(json_data.contests[i].candidates[j].party);
+       //   }
 
-          }
+      //    }
 
-          console.log('candidate string: ');
-          console.log(candidate_strings);
+        //  console.log('candidate string: ');
+        //  console.log(candidate_strings);
 
-          navigation.navigate('CandidatesScreen', {candidate_strings: candidate_strings});
-
+     //     navigation.navigate('CandidatesScreen', {candidate_strings: candidate_strings});
+            navigation.navigate('CandidatesScreen', {json_data: json_data});
 
         }}
       />
@@ -225,16 +228,77 @@ const SelectionScreen = ({route, navigation}) => {
 //*  CandidatesScreen: Displays the candidates on the ballot  *
 //*******************************************************************
 
+const Item = ({ title }) => (
+  <View style={styles.item}>
+    <Text style={styles.title}>{title}</Text>
+  </View>
+);
+
+
 const CandidatesScreen = ({route, navigation}) =>
 {
-var candidate_strings = route.params.candidate_strings;
+//var candidate_strings = route.params.candidate_strings;
+
+var json_data = route.params.json_data;
+//const contests = json_data.contests;
+
+ const fake_contests = [{title: "1", data: ["2", "3"]}];
+
+var contests = [];
+
+for (var i = 0; i < json_data.contests.length; i++)
+{
+console.log('i is: ');
+console.log(i);
+
+var candidate_names = [];
+
+for (var j = 0; j < json_data.contests[i].candidates.length; j++)
+{
+var info_string = "";
+info_string += json_data.contests[i].candidates[j].name;
+info_string += " - ";
+info_string += json_data.contests[i].candidates[j].party;
+
+candidate_names.push(info_string);
+}
+
+var cur_contest = {
+title: json_data.contests[i].office,
+data: candidate_names
+
+};
+
+contests.push(cur_contest);
+
+}
+
+
+console.log(contests);
+
 console.log('here 22');
-console.log(candidate_strings);
+//console.log(candidate_strings);
+console.log(json_data);
 return (
+<>
+
 <View>
 <Text>Here is a list of the candidates on your ballot</Text>
-<Text>{candidate_strings}</Text>
 </View>
+
+<SafeAreaView style={styles.container}>
+<SectionList
+    sections = {contests}
+    keyExtractor={(item, index) => item + index}
+    renderItem={({item}) => <Item title={item} />}
+          renderSectionHeader={({ section: { title } }) => (
+            <Text style={styles.header}>{title}</Text>
+          )}
+/>
+</SafeAreaView>
+
+</>
+
 );
 
 }
