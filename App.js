@@ -18,6 +18,28 @@ console.log('key=' + secret_key);
 import * as fake_data from './fake_data.json';
 console.log('fake_data=', fake_data);
 
+const styles = StyleSheet.create({
+    container: {
+    flex: 1,
+    paddingTop: 22,
+    },
+    sectionHeader: {
+    paddingTop: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 2,
+    fontSize: 14,
+    fontWeight: 'bold',
+    backgroundColor: 'rgba(247, 247, 247, 1.0)',
+    },
+    item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+    },
+
+})
+
 function make_google_civic_api_call(address_val, callback) {
   // var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo?address=5327 W Keefe Ave Milwaukee, Wisconsin, 53216?electionId=5009';
   // var fetch_string = 'https://www.googleapis.com/civicinfo/v2/elections';
@@ -63,7 +85,15 @@ const HomeScreen = ({navigation}) => {
   );
 
   return (
-    <View>
+    <View style= {{flex: 1,
+                              flexDirection: 'column',
+                              justifyContent: 'space-evenly',
+                              alignItems: 'stretch',}}>
+       <Text>Welcome to the STATES Election App. This app is designed to give you information about voting in the upcoming election. {"\n\n"}
+       To continue, please enter the address where you are registered to vote. If you are not yet registered to vote, enter the address
+       where you plan to register in.</Text>
+
+
       <TextInput
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
         placeholder="Enter address here"
@@ -106,7 +136,7 @@ const SelectionScreen = ({route, navigation}) => {
                     flexDirection: 'column',
                     justifyContent: 'space-evenly',
                     alignItems: 'center',}}>
-      <Text>Testing</Text>
+      <Text>Please select an option to continue.</Text>
       <Button
         title="See who is on my ballot"
         onPress={() => {
