@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-        paddingTop: 10},
+        paddingTop: 10,
+        },
     sectionHeader: {
     paddingTop: 2,
     paddingLeft: 10,
@@ -34,10 +35,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     backgroundColor: 'rgba(247, 247, 247, 1.0)',
     },
+
+
+
     item: {
-    padding: 10,
     fontSize: 24,
-    height: 44,
     },
 
 
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
 
       header: {
         fontSize: 20,
-        paddingBottom: 0
+        paddingTop: 10
       },
     title: {
       fontSize: 14,
