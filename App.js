@@ -102,7 +102,10 @@ const SelectionScreen = ({route, navigation}) => {
   });
 
   return (
-    <View>
+    <View style= {{flex: 1,
+                    flexDirection: 'column',
+                    justifyContent: 'space-evenly',
+                    alignItems: 'center',}}>
       <Text>Testing</Text>
       <Button
         title="See who is on my ballot"
