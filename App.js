@@ -21,24 +21,35 @@ console.log('fake_data=', fake_data);
 const styles = StyleSheet.create({
     container: {
     flex: 1,
-    paddingTop: 22,
-    },
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+        paddingTop: 10},
     sectionHeader: {
     paddingTop: 2,
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 2,
-    fontSize: 14,
+    fontSize: 24,
     fontWeight: 'bold',
     backgroundColor: 'rgba(247, 247, 247, 1.0)',
     },
     item: {
     padding: 10,
-    fontSize: 18,
+    fontSize: 24,
     height: 44,
     },
+
+
+
+
+      header: {
+        fontSize: 20,
+        paddingBottom: 0
+      },
     title: {
-      fontSize: 24
+      fontSize: 14,
+      paddingTop: 0,
     }
 
 })
