@@ -10,7 +10,7 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {View, Text, TextInput, Button, SafeAreaView, StyleSheet, SectionList} from 'react-native';
+import {View, Text, Button, StyleSheet} from 'react-native';
 
 import {secret_key} from './secret/secret_key.js';
 console.log('key=' + secret_key);
@@ -20,6 +20,39 @@ console.log('fake_data=', fake_data);
 
 import HomeScreen from './HomeScreen.js';
 import CandidatesScreen from './CandidatesScreen.js';
+
+// eslint-disable-next-line no-unused-vars
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    paddingTop: 10,
+  },
+  sectionHeader: {
+    paddingTop: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 2,
+    fontSize: 24,
+    fontWeight: 'bold',
+    backgroundColor: 'rgba(247, 247, 247, 1.0)',
+  },
+
+  item: {
+    fontSize: 24,
+  },
+
+  header: {
+    fontSize: 20,
+    paddingTop: 10,
+  },
+  title: {
+    fontSize: 14,
+    paddingTop: 0,
+  },
+});
 
 // eslint-disable-next-line no-unused-vars
 function make_google_civic_api_call(address_val, callback) {
@@ -78,16 +111,19 @@ const SelectionScreen = ({route, navigation}) => {
   });
 
   return (
-    <View style= {{flex: 1,
-                    flexDirection: 'column',
-                    justifyContent: 'space-evenly',
-                    alignItems: 'center',}}>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+      }}>
       <Text>Please select an option to continue.</Text>
       <Button
         title="See who is on my ballot"
         onPress={() => {
-          console.log('not implemented');
-//          var candidate_strings = '';
+          // console.log('not implemented');
+          var candidate_strings = '';
 
           for (var i in json_data.contests) {
             console.log('candidate loop');
@@ -115,14 +151,11 @@ const SelectionScreen = ({route, navigation}) => {
             }
           }
 
-      //    }
+          //    }
 
-        //  console.log('candidate string: ');
-        //  console.log(candidate_strings);
-
-     //     navigation.navigate('CandidatesScreen', {candidate_strings: candidate_strings});
-            navigation.navigate('CandidatesScreen', {json_data: json_data});
-
+          navigation.navigate('CandidatesScreen', {
+            candidate_strings: candidate_strings,
+          });
         }}
       />
       <Button
