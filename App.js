@@ -10,7 +10,7 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {View, Text, TextInput, Button, SafeAreaView, StyleSheet, SectionList} from 'react-native';
+import {View, Text, Button, StyleSheet} from 'react-native';
 
 import {secret_key} from './secret/secret_key.js';
 console.log('key=' + secret_key);
@@ -18,15 +18,19 @@ console.log('key=' + secret_key);
 import * as fake_data from './fake_data.json';
 console.log('fake_data=', fake_data);
 
+import HomeScreen from './HomeScreen.js';
+import CandidatesScreen from './CandidatesScreen.js';
+
+// eslint-disable-next-line no-unused-vars
 const styles = StyleSheet.create({
-    container: {
+  container: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-        paddingTop: 10,
-        },
-    sectionHeader: {
+    paddingTop: 10,
+  },
+  sectionHeader: {
     paddingTop: 2,
     paddingLeft: 10,
     paddingRight: 10,
@@ -34,28 +38,23 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     backgroundColor: 'rgba(247, 247, 247, 1.0)',
-    },
+  },
 
-
-
-    item: {
+  item: {
     fontSize: 24,
-    },
+  },
 
+  header: {
+    fontSize: 20,
+    paddingTop: 10,
+  },
+  title: {
+    fontSize: 14,
+    paddingTop: 0,
+  },
+});
 
-
-
-      header: {
-        fontSize: 20,
-        paddingTop: 10
-      },
-    title: {
-      fontSize: 14,
-      paddingTop: 0,
-    }
-
-})
-
+// eslint-disable-next-line no-unused-vars
 function make_google_civic_api_call(address_val, callback) {
   // var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo?address=5327 W Keefe Ave Milwaukee, Wisconsin, 53216?electionId=5009';
   // var fetch_string = 'https://www.googleapis.com/civicinfo/v2/elections';
@@ -91,42 +90,6 @@ function make_fake_data_call(address_val, callback) {
   console.log('you asked for fake data');
   callback(fake_data);
 }
-//****************************************************************************************************************************************
-//*  HomeScreen: Get the address from the user. Uses the address to get information from API and pass that on for other screens to use.  *
-//****************************************************************************************************************************************
-
-const HomeScreen = ({navigation}) => {
-  const [value, onChangeText] = React.useState(
-    '109 Noble Dr, Belle Chasse, LA, 70037',
-  );
-
-  return (
-    <View style= {{flex: 1,
-                              flexDirection: 'column',
-                              justifyContent: 'space-evenly',
-                              alignItems: 'stretch',}}>
-       <Text>Welcome to the STATES Election App. This app is designed to give you information about voting in the upcoming election. {"\n\n"}
-       To continue, please enter the address where you are registered to vote. If you are not yet registered to vote, enter the address
-       where you plan to register in.</Text>
-
-
-      <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        placeholder="Enter address here"
-        onChangeText={text => onChangeText(text)}
-        value={value}
-        id="address_field"
-      />
-
-      <Button
-        onPress={() => {
-          navigation.navigate('SelectionScreen', {address_val: value});
-        }}
-        title="Go"
-      />
-    </View>
-  );
-};
 
 //******************************************************
 //*  SelectionScreen: Holds buttons to other screens.  *
@@ -148,43 +111,51 @@ const SelectionScreen = ({route, navigation}) => {
   });
 
   return (
-    <View style= {{flex: 1,
-                    flexDirection: 'column',
-                    justifyContent: 'space-evenly',
-                    alignItems: 'center',}}>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+      }}>
       <Text>Please select an option to continue.</Text>
       <Button
         title="See who is on my ballot"
         onPress={() => {
-          console.log('not implemented');
-//          var candidate_strings = '';
+          // console.log('not implemented');
+          var candidate_strings = '';
 
-//          for (var i in json_data.contests)
-//          {
-//          console.log('candidate loop');
-//          console.log(i);
-//          console.log(json_data.contests[i]);
-//          console.log(json_data.contests[i].candidates);
+          for (var i in json_data.contests) {
+            console.log('candidate loop');
+            console.log(i);
+            console.log(json_data.contests[i]);
+            console.log(json_data.contests[i].candidates);
 
-  //        candidate_strings = candidate_strings + 'Office: ' + json_data.contests[i].office + '\n';
+            candidate_strings =
+              candidate_strings +
+              'Office: ' +
+              json_data.contests[i].office +
+              '\n';
 
-  //        for (var j in json_data.contests[i].candidates)
-  //        {
-   //         candidate_strings = candidate_strings + json_data.contests[i].candidates[j].name;
-    //        candidate_strings = candidate_strings + ' - ' + json_data.contests[i].candidates[j].party + '\n';
+            for (var j in json_data.contests[i].candidates) {
+              candidate_strings =
+                candidate_strings + json_data.contests[i].candidates[j].name;
+              candidate_strings =
+                candidate_strings +
+                ' - ' +
+                json_data.contests[i].candidates[j].party +
+                '\n';
 
-      //      console.log('here77');
-      //      console.log(json_data.contests[i].candidates[j].party);
-       //   }
+              console.log('here77');
+              console.log(json_data.contests[i].candidates[j].party);
+            }
+          }
 
-      //    }
+          //    }
 
-        //  console.log('candidate string: ');
-        //  console.log(candidate_strings);
-
-     //     navigation.navigate('CandidatesScreen', {candidate_strings: candidate_strings});
-            navigation.navigate('CandidatesScreen', {json_data: json_data});
-
+          navigation.navigate('CandidatesScreen', {
+            candidate_strings: candidate_strings,
+          });
         }}
       />
       <Button
@@ -222,7 +193,9 @@ const SelectionScreen = ({route, navigation}) => {
           console.log('9494');
           console.log(locations_strings);
 
-          navigation.navigate('PollingScreen', {locations_strings: locations_strings});
+          navigation.navigate('PollingScreen', {
+            locations_strings: locations_strings,
+          });
         }}
       />
 
@@ -237,89 +210,9 @@ const SelectionScreen = ({route, navigation}) => {
   );
 };
 
-//*******************************************************************
-//*  CandidatesScreen: Displays the candidates on the ballot  *
-//*******************************************************************
-
-const Item = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
-
-
-const CandidatesScreen = ({route, navigation}) =>
-{
-//var candidate_strings = route.params.candidate_strings;
-
-var json_data = route.params.json_data;
-//const contests = json_data.contests;
-
- const fake_contests = [{title: "1", data: ["2", "3"]}];
-
-var contests = [];
-
-for (var i = 0; i < json_data.contests.length; i++)
-{
-console.log('i is: ');
-console.log(i);
-
-var candidate_names = [];
-
-for (var j = 0; j < json_data.contests[i].candidates.length; j++)
-{
-var info_string = "";
-info_string += json_data.contests[i].candidates[j].name;
-info_string += " - ";
-info_string += json_data.contests[i].candidates[j].party;
-
-candidate_names.push(info_string);
-}
-
-var cur_contest = {
-title: json_data.contests[i].office,
-data: candidate_names
-
-};
-
-contests.push(cur_contest);
-
-}
-
-
-console.log(contests);
-
-console.log('here 22');
-//console.log(candidate_strings);
-console.log(json_data);
-return (
-<>
-
-<View>
-<Text>Here is a list of the candidates on your ballot</Text>
-</View>
-
-<SafeAreaView style={styles.container}>
-<SectionList
-    sections = {contests}
-    keyExtractor={(item, index) => item + index}
-    renderItem={({item}) => <Item title={item} />}
-          renderSectionHeader={({ section: { title } }) => (
-            <Text style={styles.header}>{title}</Text>
-          )}
-/>
-</SafeAreaView>
-
-</>
-
-);
-
-}
-
-
-//*******************************************************************
+//*****************************************************************
 //*  PollingScreen: Get the polling station(s) and display them.  *
-//*******************************************************************
+//*****************************************************************
 
 const PollingScreen = ({route, navigation}) => {
   var locations = route.params.locations_strings;
@@ -380,8 +273,7 @@ const App = () => {
 
         <Stack.Screen name="PollingScreen" component={PollingScreen} />
 
-        <Stack.Screen name="CandidatesScreen" component = {CandidatesScreen}/>
-
+        <Stack.Screen name="CandidatesScreen" component={CandidatesScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
