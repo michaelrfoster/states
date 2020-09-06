@@ -10,7 +10,7 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {View, Text, Button} from 'react-native';
+import {View, Text, TextInput, Button, SafeAreaView, StyleSheet, SectionList} from 'react-native';
 
 import {secret_key} from './secret/secret_key.js';
 console.log('key=' + secret_key);
@@ -78,13 +78,16 @@ const SelectionScreen = ({route, navigation}) => {
   });
 
   return (
-    <View>
-      <Text>Testing</Text>
+    <View style= {{flex: 1,
+                    flexDirection: 'column',
+                    justifyContent: 'space-evenly',
+                    alignItems: 'center',}}>
+      <Text>Please select an option to continue.</Text>
       <Button
         title="See who is on my ballot"
         onPress={() => {
           console.log('not implemented');
-          var candidate_strings = '';
+//          var candidate_strings = '';
 
           for (var i in json_data.contests) {
             console.log('candidate loop');
@@ -112,12 +115,14 @@ const SelectionScreen = ({route, navigation}) => {
             }
           }
 
-          console.log('candidate string: ');
-          console.log(candidate_strings);
+      //    }
 
-          navigation.navigate('CandidatesScreen', {
-            candidate_strings: candidate_strings,
-          });
+        //  console.log('candidate string: ');
+        //  console.log(candidate_strings);
+
+     //     navigation.navigate('CandidatesScreen', {candidate_strings: candidate_strings});
+            navigation.navigate('CandidatesScreen', {json_data: json_data});
+
         }}
       />
       <Button
