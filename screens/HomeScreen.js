@@ -1,11 +1,10 @@
-'use strict';
 
 //****************************************************************************************************************************************
 //*  HomeScreen: Get the address from the user. Uses the address to get information from API and pass that on for other screens to use.  *
 //****************************************************************************************************************************************
 
 import React from 'react';
-import {View, TextInput, Button} from 'react-native';
+import {View, TextInput, Button, Text} from 'react-native';
 
 const HomeScreen = ({navigation}) => {
   const [value, onChangeText] = React.useState(
@@ -13,7 +12,15 @@ const HomeScreen = ({navigation}) => {
   );
 
   return (
-    <View>
+    <View style= {{flex: 1,
+                                        flexDirection: 'column',
+                                        justifyContent: 'space-evenly',
+                                        alignItems: 'stretch',}}>
+
+             <Text>Welcome to the STATES Election App. This app is designed to give you information about voting in the upcoming election. {"\n\n"}
+             To continue, please enter the address where you are registered to vote. If you are not yet registered to vote, enter the address
+             where you plan to register in.</Text>
+
       <TextInput
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
         placeholder="Enter address here"

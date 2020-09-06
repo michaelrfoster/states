@@ -1,4 +1,3 @@
-'use strict';
 
 //*************************************************************
 //*  CandidatesScreen: Displays the candidates on the ballot  *
