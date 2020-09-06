@@ -206,6 +206,18 @@ const SelectionScreen = ({route, navigation}) => {
           navigation.navigate('LinksScreen', {link_info: json_data});
         }}
       />
+      <Button
+        title="Abstentee voting resources"
+        onPress={() => {
+          navigation.navigate('AbstenteeScreen', {link_info: json_data});
+        }}
+      />
+      <Button
+        title="Change Address"
+        onPress={() => {
+          navigation.navigate('HomeScreen');
+        }}
+      />
     </View>
   );
 };
@@ -259,17 +271,45 @@ const LinksScreen = ({route, navigation}) => {
   );
 };
 
+const AbstenteeScreen = ({route, navigation}) => {
+  var link_info = route.params.link_info;
+  console.log('here 29');
+  console.log(link_info);
+  console.log('state here');
+  console.log(link_info.state);
+
+  // var link_display_string = link_info.state.electionAdministrationBody;
+  var link_display_string =
+    link_info.state[0].electionAdministrationBody.electionInfoUrl;
+  console.log(link_display_string);
+  // console.log('abs');
+  // console.log(link_info.state[0].electionAdministrationBody.absenteeVotingInfoUrl);
+  // console.log(link_info.state[0].electionAdministrationBody);
+
+  return (
+    <View>
+      <Text>
+        Here are some resources to help you find more information about abstentee voting!
+      </Text>
+
+      <Text>Abstentee info: {link_display_string}</Text>
+    </View>
+  );
+};
+
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
 
         <Stack.Screen name="SelectionScreen" component={SelectionScreen} />
 
         <Stack.Screen name="LinksScreen" component={LinksScreen} />
+
+        <Stack.Screen name="AbstenteeScreen" component={AbstenteeScreen} />
 
         <Stack.Screen name="PollingScreen" component={PollingScreen} />
 
