@@ -18,10 +18,6 @@ console.log('key=' + secret_key);
 import * as fake_data from './fake_data.json';
 console.log('fake_data=', fake_data);
 
-import HomeScreen from './screens/HomeScreen.js';
-import CandidatesScreen from './screens/CandidatesScreen.js';
-
-// eslint-disable-next-line no-unused-vars
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -41,7 +37,7 @@ const styles = StyleSheet.create({
   },
 
   item: {
-    fontSize: 24,
+    fontSize: 48,
   },
 
   header: {
@@ -53,6 +49,12 @@ const styles = StyleSheet.create({
     paddingTop: 0,
   },
 });
+
+import HomeScreen from './screens/HomeScreen.js';
+import CandidatesScreen from './screens/CandidatesScreen.js';
+
+// eslint-disable-next-line no-unused-vars
+
 
 // eslint-disable-next-line no-unused-vars
 function make_google_civic_api_call(address_val, callback) {
@@ -123,39 +125,40 @@ const SelectionScreen = ({route, navigation}) => {
         title="See who is on my ballot"
         onPress={() => {
           // console.log('not implemented');
-          var candidate_strings = '';
+  //        var candidate_strings = '';
 
-          for (var i in json_data.contests) {
-            console.log('candidate loop');
-            console.log(i);
-            console.log(json_data.contests[i]);
-            console.log(json_data.contests[i].candidates);
+ //         for (var i in json_data.contests) {
+  //          console.log('candidate loop');
+  //          console.log(i);
+    //        console.log(json_data.contests[i]);
+      //      console.log(json_data.contests[i].candidates);
 
-            candidate_strings =
-              candidate_strings +
-              'Office: ' +
-              json_data.contests[i].office +
-              '\n';
+        //    candidate_strings =
+          //    candidate_strings +
+          //    'Office: ' +
+          //    json_data.contests[i].office +
+          //    '\n';
 
-            for (var j in json_data.contests[i].candidates) {
-              candidate_strings =
-                candidate_strings + json_data.contests[i].candidates[j].name;
-              candidate_strings =
-                candidate_strings +
-                ' - ' +
-                json_data.contests[i].candidates[j].party +
-                '\n';
+       //     for (var j in json_data.contests[i].candidates) {
+         //     candidate_strings =
+           //     candidate_strings + json_data.contests[i].candidates[j].name;
+           //   candidate_strings =
+            //    candidate_strings +
+            //    ' - ' +
+            //    json_data.contests[i].candidates[j].party +
+            //    '\n';
 
-              console.log('here77');
-              console.log(json_data.contests[i].candidates[j].party);
-            }
-          }
+          //    console.log('here77');
+           //   console.log(json_data.contests[i].candidates[j].party);
+           // }
+    //      }
 
           //    }
 
-          navigation.navigate('CandidatesScreen', {
-            candidate_strings: candidate_strings,
-          });
+    //      navigation.navigate('CandidatesScreen', {
+      //      candidate_strings: candidate_strings,
+    //      });
+    navigation.navigate('CandidatesScreen', {json_data: json_data});
         }}
       />
       <Button
