@@ -18,8 +18,8 @@ console.log('key=' + secret_key);
 import * as fake_data from './fake_data.json';
 console.log('fake_data=', fake_data);
 
-import HomeScreen from './HomeScreen.js';
-import CandidatesScreen from './CandidatesScreen.js';
+import HomeScreen from './screens/HomeScreen.js';
+import CandidatesScreen from './screens/CandidatesScreen.js';
 
 // eslint-disable-next-line no-unused-vars
 const styles = StyleSheet.create({
