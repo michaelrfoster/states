@@ -1,4 +1,4 @@
-
+'use strict';
 //****************************************************************************************************************************************
 //*  HomeScreen: Get the address from the user. Uses the address to get information from API and pass that on for other screens to use.  *
 //****************************************************************************************************************************************
@@ -12,14 +12,20 @@ const HomeScreen = ({navigation}) => {
   );
 
   return (
-    <View style= {{flex: 1,
-                                        flexDirection: 'column',
-                                        justifyContent: 'space-evenly',
-                                        alignItems: 'stretch',}}>
-
-             <Text>Welcome to the STATES Election App. This app is designed to give you information about voting in the upcoming election. {"\n\n"}
-             To continue, please enter the address where you are registered to vote. If you are not yet registered to vote, enter the address
-             where you plan to register in.</Text>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+        alignItems: 'stretch',
+      }}>
+      <Text>
+        Welcome to the STATES Election App. This app is designed to give you
+        information about voting in the upcoming election. {'\n\n'}
+        To continue, please enter the address where you are registered to vote.
+        If you are not yet registered to vote, enter the address where you plan
+        to register in.
+      </Text>
 
       <TextInput
         style={{height: 40, borderColor: 'gray', borderWidth: 1}}
