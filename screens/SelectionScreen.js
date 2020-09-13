@@ -78,40 +78,10 @@ const SelectionScreen = ({route, navigation}) => {
       <Button
         title="View polling stations"
         onPress={() => {
-          var location_strings = '';
 
-          for (var i in json_data.pollingLocations) {
-            console.log('loop');
-            console.log(i);
-            var locations_strings =
-              location_strings +
-              'Location: ' +
-              json_data.pollingLocations[i].address.locationName +
-              '\n';
-            locations_strings =
-              locations_strings +
-              'Address: ' +
-              json_data.pollingLocations[i].address.line1 +
-              ', ';
-            // locations_strings = locations_strings + json_data.pollingLocations[i].address.line2;
-            // locations_strings = locations_strings + json_data.pollingLocations[i].address.line3;
-            locations_strings =
-              locations_strings +
-              json_data.pollingLocations[i].address.city +
-              ', ';
-            locations_strings =
-              locations_strings +
-              json_data.pollingLocations[i].address.state +
-              ', ';
-            locations_strings =
-              locations_strings + json_data.pollingLocations[i].address.zip;
-          }
-
-          console.log('9494');
-          console.log(locations_strings);
 
           navigation.navigate('PollingScreen', {
-            locations_strings: locations_strings,
+            json_data: json_data,
           });
         }}
       />
