@@ -39,23 +39,17 @@ const styles = StyleSheet.create({
   },
 });
 
-console.log('234758');
-console.log(styles);
-
+// Takes in text and returns component with proper formatting
 const Item = ({title}) => (
   <View style={styles.item}>
     <Text style={styles.title}>{title}</Text>
   </View>
 );
+
 const CandidatesScreen = ({route, navigation}) => {
-  //var candidate_strings = route.params.candidate_strings;
   var json_data = route.params.json_data;
-  //const contests = json_data.contests;
-  const fake_contests = [{title: '1', data: ['2', '3']}];
   var contests = [];
   for (var i = 0; i < json_data.contests.length; i++) {
-    console.log('i is: ');
-    console.log(i);
     var candidate_names = [];
     for (var j = 0; j < json_data.contests[i].candidates.length; j++) {
       var info_string = '';
@@ -70,10 +64,7 @@ const CandidatesScreen = ({route, navigation}) => {
     };
     contests.push(cur_contest);
   }
-  console.log(contests);
-  console.log('here 22');
-  //console.log(candidate_strings);
-  console.log(json_data);
+
   return (
     <>
       <View>

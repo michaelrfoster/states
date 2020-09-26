@@ -7,19 +7,15 @@ import React from 'react';
 import {View, Text} from 'react-native';
 
 const AbsenteeScreen = ({route, navigation}) => {
-  var link_info = route.params.link_info;
+  var json_data = route.params.json_data;
   console.log('here 29');
-  console.log(link_info);
+  console.log(json_data);
   console.log('state here');
-  console.log(link_info.state);
+  console.log(json_data.state);
 
-  // var link_display_string = link_info.state.electionAdministrationBody;
   var link_display_string =
-    link_info.state[0].electionAdministrationBody.electionInfoUrl;
+    json_data.state[0].electionAdministrationBody.electionInfoUrl;
   console.log(link_display_string);
-  // console.log('abs');
-  // console.log(link_info.state[0].electionAdministrationBody.absenteeVotingInfoUrl);
-  // console.log(link_info.state[0].electionAdministrationBody);
 
   return (
     <View>

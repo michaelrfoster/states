@@ -39,83 +39,68 @@ const styles = StyleSheet.create({
   },
 });
 
-
 const Item = ({title}) => (
   <View style={styles.item}>
     <Text style={styles.title}>{title}</Text>
   </View>
 );
 
-  const renderItem = ({ item }) => (
-    <Item title={item.title} />
-  );
+const renderItem = ({item}) => <Item title={item.title} />;
 
 const PollingScreen = ({route, navigation}) => {
   var json_data = route.params.json_data;
 
-  console.log('all here!');
-  console.log(json_data);
-
   var data = [];
 
-  for (var i in json_data.pollingLocations)
-  {
+  for (var i in json_data.pollingLocations) {
     console.log(i);
-      var locations_strings = ""
+    var locations_strings = '';
 
-                locations_strings =
-                  locations_strings +
-                  'Location: ' +
-                  json_data.pollingLocations[i].address.locationName +
-                  '\n';
-                locations_strings =
-                  locations_strings +
-                  'Address: ' +
-                  json_data.pollingLocations[i].address.line1 +
-                  ', ';
-                  if (json_data.pollingLocations[i].address.line2)
-                  {
-                 locations_strings = locations_strings + json_data.pollingLocations[i].address.line2;
-                 }
-                 if (json_data.pollingLocations[i].address.line3)
-                 {
-                 locations_strings = locations_strings + json_data.pollingLocations[i].address.line3;
-                 }
-                locations_strings =
-                  locations_strings +
-                  json_data.pollingLocations[i].address.city +
-                  ', ';
-                locations_strings =
-                  locations_strings +
-                  json_data.pollingLocations[i].address.state +
-                  ', ';
-                locations_strings =
-                  locations_strings + json_data.pollingLocations[i].address.zip;
+    locations_strings =
+      locations_strings +
+      'Location: ' +
+      json_data.pollingLocations[i].address.locationName +
+      '\n';
+    locations_strings =
+      locations_strings +
+      'Address: ' +
+      json_data.pollingLocations[i].address.line1 +
+      ', ';
+    if (json_data.pollingLocations[i].address.line2) {
+      locations_strings =
+        locations_strings + json_data.pollingLocations[i].address.line2;
+    }
+    if (json_data.pollingLocations[i].address.line3) {
+      locations_strings =
+        locations_strings + json_data.pollingLocations[i].address.line3;
+    }
+    locations_strings =
+      locations_strings + json_data.pollingLocations[i].address.city + ', ';
+    locations_strings =
+      locations_strings + json_data.pollingLocations[i].address.state + ', ';
+    locations_strings =
+      locations_strings + json_data.pollingLocations[i].address.zip;
 
-                  var cur_location = {
-                  id: i,
-                  title: locations_strings,
+    var cur_location = {
+      id: i,
+      title: locations_strings,
+    };
 
-                  }
-
-                  data.push(cur_location);
-
+    data.push(cur_location);
   }
 
-  console.log(data);
   return (
-  <>
-    <View>
-      <Text>Here is a list of nearby polling stations</Text>
-    </View>
-    <SafeAreaView style={styles.container}>
-    <FlatList
-    data={data}
-    renderItem={renderItem}
-    keyExtractor={item => item.id}
-
-    />
-    </SafeAreaView>
+    <>
+      <View>
+        <Text>Here is a list of nearby polling stations</Text>
+      </View>
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
+      </SafeAreaView>
     </>
   );
 };

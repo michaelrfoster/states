@@ -78,25 +78,16 @@ const SelectionScreen = ({route, navigation}) => {
       <Button
         title="View polling stations"
         onPress={() => {
-
-
           navigation.navigate('PollingScreen', {
             json_data: json_data,
           });
         }}
       />
-
       <Button
         title="Additional election resources"
         onPress={() => {
           console.log('not here');
-          navigation.navigate('LinksScreen', {link_info: json_data});
-        }}
-      />
-      <Button
-        title="Abstentee voting resources"
-        onPress={() => {
-          navigation.navigate('AbstenteeScreen', {link_info: json_data});
+          navigation.navigate('LinksScreen', {json_data: json_data});
         }}
       />
       <Button
