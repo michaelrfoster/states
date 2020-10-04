@@ -9,7 +9,6 @@ import CandidatesScreen from './screens/CandidatesScreen.js';
 import SelectionScreen from './screens/SelectionScreen.js';
 import PollingScreen from './screens/PollingScreen.js';
 import LinksScreen from './screens/LinksScreen.js';
-import AbsenteeScreen from './screens/AbsenteeScreen.js';
 
 const Stack = createStackNavigator();
 
@@ -22,8 +21,6 @@ const App = () => {
         <Stack.Screen name="SelectionScreen" component={SelectionScreen} />
 
         <Stack.Screen name="LinksScreen" component={LinksScreen} />
-
-        <Stack.Screen name="AbstenteeScreen" component={AbsenteeScreen} />
 
         <Stack.Screen name="PollingScreen" component={PollingScreen} />
 
