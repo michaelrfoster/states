@@ -4,9 +4,41 @@
 //******************************************************
 
 import React from 'react';
-import {View, Button, Text} from 'react-native';
+import {View, Button, Text, StyleSheet} from 'react-native';
 import * as fake_data from '../fake_data.json';
 import {secret_key} from '../secret/secret_key.js';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    paddingTop: 10,
+  },
+  sectionHeader: {
+    paddingTop: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 2,
+    fontSize: 24,
+    fontWeight: 'bold',
+    backgroundColor: 'rgba(247, 247, 247, 1.0)',
+  },
+
+  item: {
+    fontSize: 48,
+  },
+
+  header: {
+    fontSize: 20,
+    paddingTop: 10,
+  },
+  title: {
+    fontSize: 14,
+    paddingTop: 0,
+  },
+});
 
 // eslint-disable-next-line no-unused-vars
 function make_google_civic_api_call(address_val, callback) {
@@ -72,7 +104,10 @@ const SelectionScreen = ({route, navigation}) => {
       <Button
         title="See who is on my ballot"
         onPress={() => {
-          navigation.navigate('CandidatesScreen', {json_data: json_data});
+          navigation.navigate('CandidatesScreen', {
+            json_data: json_data,
+            styles: styles,
+          });
         }}
       />
       <Button
@@ -80,6 +115,7 @@ const SelectionScreen = ({route, navigation}) => {
         onPress={() => {
           navigation.navigate('PollingScreen', {
             json_data: json_data,
+            styles: styles,
           });
         }}
       />

@@ -4,51 +4,18 @@
 //*****************************************************************
 
 import React from 'react';
-import {View, Text, SafeAreaView, FlatList, StyleSheet} from 'react-native';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    paddingTop: 10,
-  },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 24,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247, 247, 247, 1.0)',
-  },
-
-  item: {
-    fontSize: 48,
-    paddingTop: 10,
-  },
-
-  header: {
-    fontSize: 20,
-    paddingTop: 10,
-  },
-  title: {
-    fontSize: 14,
-    paddingTop: 10,
-  },
-});
-
-const Item = ({title}) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
-
-const renderItem = ({item}) => <Item title={item.title} />;
+import {View, Text, SafeAreaView, FlatList} from 'react-native';
 
 const PollingScreen = ({route, navigation}) => {
   var json_data = route.params.json_data;
+  const styles = route.params.styles;
+  // Functions for FlatList
+  const Item = ({title}) => (
+    <View style={styles.item}>
+      <Text style={styles.title}>{title}</Text>
+    </View>
+  );
+  const renderItem = ({item}) => <Item title={item.title} />;
 
   var data = [];
 

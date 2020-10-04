@@ -4,49 +4,16 @@
 //*************************************************************
 
 import React from 'react';
-//import styles from '../App.js'; won't work for me
-import {View, Text, SafeAreaView, SectionList, StyleSheet} from 'react-native';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    paddingTop: 10,
-  },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 24,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247, 247, 247, 1.0)',
-  },
-
-  item: {
-    fontSize: 48,
-  },
-
-  header: {
-    fontSize: 20,
-    paddingTop: 10,
-  },
-  title: {
-    fontSize: 14,
-    paddingTop: 0,
-  },
-});
-
-// Takes in text and returns component with proper formatting
-const Item = ({title}) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
+import {View, Text, SafeAreaView, SectionList} from 'react-native';
 
 const CandidatesScreen = ({route, navigation}) => {
+  const styles = route.params.styles;
+  // Item renderer for SectionList
+  const Item = ({title}) => (
+    <View style={styles.item}>
+      <Text style={styles.title}>{title}</Text>
+    </View>
+  );
   var json_data = route.params.json_data;
   var contests = [];
   for (var i = 0; i < json_data.contests.length; i++) {
