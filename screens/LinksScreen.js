@@ -4,7 +4,7 @@
 //**********************************************************************
 
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Linking} from 'react-native';
 
 const LinksScreen = ({route, navigation}) => {
   var json_data = route.params.json_data;
@@ -15,11 +15,12 @@ const LinksScreen = ({route, navigation}) => {
   return (
     <View>
       <Text>
-        Here are some resources to help you find more information about the
-        election!
+        Here is a link to a website that will help you register to vote and show you more information about the election.
       </Text>
 
-      <Text>General election info: {link_display_string}</Text>
+      <Text style={{color: 'blue'}}
+      onPress={() => Linking.openURL('https://vote.gov/ ')}>
+      General election information</Text>
     </View>
   );
 };
