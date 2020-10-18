@@ -48,6 +48,12 @@ const PollingScreen = ({route, navigation}) => {
     locations_strings =
       locations_strings + json_data.pollingLocations[i].address.zip;
 
+    if (json_data.pollingLocations[i].pollingHours)
+    {
+    locations_strings += "\nHours Open: ";
+    locations_strings += json_data.pollingLocations[i].pollingHours;
+    }
+
     var cur_location = {
       id: i,
       title: locations_strings,
