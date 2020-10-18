@@ -8,7 +8,8 @@ import {View, TextInput, Button, Text} from 'react-native';
 
 const HomeScreen = ({navigation}) => {
   const [value, onChangeText] = React.useState(
-    '109 Noble Dr, Belle Chasse, LA, 70037',
+    'eg. 1234 Sample St. SampleTown LA 98765',
+
   );
 
   return (

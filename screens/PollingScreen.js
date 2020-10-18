@@ -19,13 +19,62 @@ const PollingScreen = ({route, navigation}) => {
 
   var data = [];
 
-  for (var i in json_data.pollingLocations) {
+
+  for (var i in json_data.earlyVoteSites)
+  {
+    var locations_strings = ""
+
+    console.log('looping');
     console.log(i);
-    var locations_strings = '';
 
     locations_strings =
       locations_strings +
-      'Location: ' +
+      '\nEarly Vote Location: ' +
+      json_data.earlyVoteSites[i].address.locationName +
+      '\n';
+    locations_strings =
+      locations_strings +
+      'Address: ' +
+      json_data.earlyVoteSites[i].address.line1 +
+      ', ';
+    if (json_data.earlyVoteSites[i].address.line2) {
+      locations_strings =
+        locations_strings + json_data.earlyVoteSites[i].address.line2;
+    }
+    if (json_data.earlyVoteSites[i].address.line3) {
+      locations_strings =
+        locations_strings + json_data.earlyVoteSites[i].address.line3;
+    }
+    locations_strings =
+      locations_strings + json_data.earlyVoteSites[i].address.city + ', ';
+    locations_strings =
+      locations_strings + json_data.earlyVoteSites[i].address.state + ', ';
+    locations_strings =
+      locations_strings + json_data.earlyVoteSites[i].address.zip;
+
+    if (json_data.earlyVoteSites[i].pollingHours)
+    {
+    locations_strings += "\nHours Open: ";
+    locations_strings += json_data.earlyVoteSites[i].pollingHours;
+    }
+
+
+
+    var cur_location = {
+      id: 'early' + i,
+      title: locations_strings,
+    };
+
+    data.push(cur_location);
+  }
+
+
+  for (var i in json_data.pollingLocations) {
+    var locations_strings = ""
+
+    locations_strings =
+      locations_strings +
+      '\nPolling Location: ' +
       json_data.pollingLocations[i].address.locationName +
       '\n';
     locations_strings =
@@ -54,6 +103,8 @@ const PollingScreen = ({route, navigation}) => {
     locations_strings += json_data.pollingLocations[i].pollingHours;
     }
 
+
+
     var cur_location = {
       id: i,
       title: locations_strings,
@@ -62,11 +113,16 @@ const PollingScreen = ({route, navigation}) => {
     data.push(cur_location);
   }
 
+      if (locations_strings == null)
+      {
+       locations_strings = "It looks like the polling location data for your district is not yet available on the Google Civic API. You may still be able to find this information by checking the links on our Additional Election Resources Page or by going to https://vote.gov/";
+       var cur_location = {id: 'none', title: locations_strings};
+       data.push(cur_location);
+      }
+
+
   return (
-    <>
-      <View>
-        <Text>Here is a list of nearby polling stations</Text>
-      </View>
+
       <SafeAreaView style={styles.container}>
         <FlatList
           data={data}
@@ -74,7 +130,6 @@ const PollingScreen = ({route, navigation}) => {
           keyExtractor={item => item.id}
         />
       </SafeAreaView>
-    </>
   );
 };
 

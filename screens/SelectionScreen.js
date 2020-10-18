@@ -102,7 +102,7 @@ const SelectionScreen = ({route, navigation}) => {
       }}>
       <Text>Please select an option to continue.</Text>
       <Button
-        title="See who is on my ballot"
+        title="See who is on your ballot"
         onPress={() => {
           navigation.navigate('Candidate List', {
             json_data: json_data,
