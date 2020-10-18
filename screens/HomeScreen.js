@@ -37,7 +37,7 @@ const HomeScreen = ({navigation}) => {
 
       <Button
         onPress={() => {
-          navigation.navigate('SelectionScreen', {address_val: value});
+          navigation.navigate('Select An Option', {address_val: value});
         }}
         title="Go"
       />

@@ -104,7 +104,7 @@ const SelectionScreen = ({route, navigation}) => {
       <Button
         title="See who is on my ballot"
         onPress={() => {
-          navigation.navigate('CandidatesScreen', {
+          navigation.navigate('Candidate List', {
             json_data: json_data,
             styles: styles,
           });
@@ -113,7 +113,7 @@ const SelectionScreen = ({route, navigation}) => {
       <Button
         title="View polling stations"
         onPress={() => {
-          navigation.navigate('PollingScreen', {
+          navigation.navigate('Voting Locations', {
             json_data: json_data,
             styles: styles,
           });
@@ -123,13 +123,13 @@ const SelectionScreen = ({route, navigation}) => {
         title="Additional election resources"
         onPress={() => {
           console.log('not here');
-          navigation.navigate('LinksScreen', {json_data: json_data});
+          navigation.navigate('Election Resources', {json_data: json_data});
         }}
       />
       <Button
         title="Change Address"
         onPress={() => {
-          navigation.navigate('HomeScreen');
+          navigation.navigate('Home Screen');
         }}
       />
     </View>

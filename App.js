@@ -16,15 +16,15 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="Home Screen" component={HomeScreen} />
 
-        <Stack.Screen name="SelectionScreen" component={SelectionScreen} />
+        <Stack.Screen name="Select An Option" component={SelectionScreen} />
 
-        <Stack.Screen name="LinksScreen" component={LinksScreen} />
+        <Stack.Screen name="Election Resources" component={LinksScreen} />
 
-        <Stack.Screen name="PollingScreen" component={PollingScreen} />
+        <Stack.Screen name="Voting Locations" component={PollingScreen} />
 
-        <Stack.Screen name="CandidatesScreen" component={CandidatesScreen} />
+        <Stack.Screen name="Candidate List" component={CandidatesScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

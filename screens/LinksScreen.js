@@ -9,8 +9,8 @@ import {View, Text, Linking} from 'react-native';
 const LinksScreen = ({route, navigation}) => {
   var json_data = route.params.json_data;
 
-  var link_display_string =
-    json_data.state[0].electionAdministrationBody.electionInfoUrl;
+ // var link_display_string =
+ //   json_data.state[0].electionAdministrationBody.electionInfoUrl;
 
   return (
     <View>
