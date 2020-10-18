@@ -21,6 +21,11 @@ const LinksScreen = ({route, navigation}) => {
       <Text style={{color: 'blue'}}
       onPress={() => Linking.openURL('https://vote.gov/ ')}>
       General election information</Text>
+
+
+      <Text style={{color: 'blue'}}
+      onPress={() => Linking.openURL('https://www.instagram.com/stelections/')}>
+      STATES Elections Instagram Page</Text>
     </View>
   );
 };

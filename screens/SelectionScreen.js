@@ -46,7 +46,7 @@ function make_google_civic_api_call(address_val, callback) {
   // var fetch_string = 'https://www.googleapis.com/civicinfo/v2/elections';
   var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo';
   fetch_string += '?address=' + address_val;
-  fetch_string += '&electionId=' + '4953';
+  fetch_string += '&electionId=' + '7000';
   fetch_string += '&key=' + secret_key;
   console.log('test');
   console.log(fetch_string);
@@ -84,14 +84,14 @@ const SelectionScreen = ({route, navigation}) => {
 
   var json_data;
 
-  /*make_google_civic_api_call(address_val, function(response) {
+  make_google_civic_api_call(address_val, function(response) {
       json_data = response;
-    });*/
-
+    });
+/*
   make_fake_data_call(address_val, response => {
     json_data = response;
   });
-
+*/
   return (
     <View
       style={{
