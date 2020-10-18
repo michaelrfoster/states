@@ -15,7 +15,7 @@ const LinksScreen = ({route, navigation}) => {
   return (
     <View>
       <Text>
-        Here is a link to a website that will help you register to vote and show you more information about the election.
+        Here are some links that can provide you with more information about the election.
       </Text>
 
       <Text style={{color: 'blue'}}

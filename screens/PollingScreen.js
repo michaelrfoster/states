@@ -24,9 +24,6 @@ const PollingScreen = ({route, navigation}) => {
   {
     var locations_strings = ""
 
-    console.log('looping');
-    console.log(i);
-
     locations_strings =
       locations_strings +
       '\nEarly Vote Location: ' +

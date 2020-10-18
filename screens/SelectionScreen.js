@@ -48,15 +48,13 @@ function make_google_civic_api_call(address_val, callback) {
   fetch_string += '?address=' + address_val;
   fetch_string += '&electionId=' + '7000';
   fetch_string += '&key=' + secret_key;
-  console.log('test');
-  console.log(fetch_string);
+
   fetch(fetch_string, {
     method: 'GET',
   })
     .then(response => response.json())
     .then(responseJson => {
-      console.log('done with json request');
-      console.log(responseJson);
+
       /* console.log('object');
          const json_obj = JSON.parse(responseJson);
          console.log('state after stringify');
@@ -79,8 +77,6 @@ function make_fake_data_call(address_val, callback) {
 
 const SelectionScreen = ({route, navigation}) => {
   var address_val = route.params.address_val;
-  console.log('here 27');
-  console.log(address_val);
 
   var json_data;
 
@@ -122,7 +118,6 @@ const SelectionScreen = ({route, navigation}) => {
       <Button
         title="Additional election resources"
         onPress={() => {
-          console.log('not here');
           navigation.navigate('Election Resources', {json_data: json_data});
         }}
       />
