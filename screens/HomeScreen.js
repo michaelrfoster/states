@@ -29,14 +29,6 @@ import {Picker} from '@react-native-picker/picker';
 
       console.log(responseJson);
 
-        /* console.log('object');
-           const json_obj = JSON.parse(responseJson);
-           console.log('state after stringify');
-           console.log(responseJson.state);
-           var stringified = JSON.stringify(responseJson);
-           console.log(stringified);
-
-           return stringified;*/
         callback(responseJson);
       })
       .catch(error => {
@@ -45,31 +37,38 @@ import {Picker} from '@react-native-picker/picker';
   }
 const HomeScreen = ({navigation}) => {
 
-      //  state = {language: 'java' };
-
   const [value, onChangeText] = React.useState(
     'eg. 1234 Sample St. SampleTown LA 98765',
 
   );
 
-  const [elections, changeElections] = React.useState('Test');
+//var arr = 0;
 
-
+/*
     get_elections(function(response) {
         var json_data = response;
+
+        arr = json_data.elections.slice(1, json_data.len);
+
+
+
+
+
+
+  console.log("arr", arr);
+
+       test = arr[0].name;
+
+         console.log("test", test);
+
+
+
       });
 
-    var state = {
-    language: 'java',
-    };
 
-    var updateState = (indexValue, itemValue) => {
-        state.language = indexValue;
-       // selectedValue = language;
+          const [elections, changeElections] = React.useState(arr);
 
-        console.log("done\n");
-        console.log(state.language);
-    }
+*/
 
 
 
@@ -95,26 +94,6 @@ const HomeScreen = ({navigation}) => {
         If you are not yet registered to vote, enter the address where you plan
         to register in.
       </Text>
-
-          <Picker
-            selectedValue={elections}
-            style={{height: 50, width: 100}}
-            mode="dropdown"
-            onValueChange={itemValue => changeElections(itemValue)}
- /*           onValueChange = { (itemValue, itemIndex) =>
-              state.language = itemValue;
-              // selectedValue = language;
-
-              console.log("done\n");
-              console.log(state.language);
-
-              selectedValue = itemValue;
-
-            } */
-           >
-            <Picker.Item label="Java" value="java" />
-            <Picker.Item label="JavaScript" value="js" />
-          </Picker>
 
 
       <TextInput

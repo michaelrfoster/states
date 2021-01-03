@@ -46,7 +46,7 @@ function make_google_civic_api_call(address_val, callback) {
   // var fetch_string = 'https://www.googleapis.com/civicinfo/v2/elections';
   var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo';
   fetch_string += '?address=' + address_val;
-  fetch_string += '&electionId=' + '7000';
+  fetch_string += '&electionId=' + '7001';
   fetch_string += '&key=' + secret_key;
 
   fetch(fetch_string, {
