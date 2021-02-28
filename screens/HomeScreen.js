@@ -11,6 +11,8 @@ import {secret_key} from '../secret/secret_key.js';
 
 import {Picker} from '@react-native-picker/picker';
 
+//import RNPickerSelect from 'react-native-picker-select';
+
 
 
   function get_elections(callback) {
@@ -42,37 +44,38 @@ const HomeScreen = ({navigation}) => {
 
   );
 
-//var arr = 0;
+var arr = 0;
 
-/*
+
     get_elections(function(response) {
         var json_data = response;
 
         arr = json_data.elections.slice(1, json_data.len);
 
 
-
+    console.log("FINAL DATA",json_data);
 
 
 
   console.log("arr", arr);
 
-       test = arr[0].name;
+   //    test = arr[0].name;
 
-         console.log("test", test);
+     //    console.log("test", test);
 
 
 
       });
 
 
-          const [elections, changeElections] = React.useState(arr);
+       //   const [elections, changeElections] = React.useState(arr);
 
-*/
+
 
 
 
   return (
+
 
 
     <View
@@ -82,6 +85,15 @@ const HomeScreen = ({navigation}) => {
         justifyContent: 'space-evenly',
         alignItems: 'stretch',
       }}>
+
+
+
+          <Picker>
+          <Picker.Item label="TEST" value="test" />
+          <Picker.Item label="2" value="3" />
+          </Picker>
+
+
       <Text>
         Welcome to the STATES Election App. This app is designed to give you
         information about voting in the upcoming election. {'\n\n'}
