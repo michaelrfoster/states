@@ -3,7 +3,7 @@
 //*  HomeScreen: Get the address from the user. Uses the address to get information from API and pass that on for other screens to use.  *
 //****************************************************************************************************************************************
 
-import React from 'react';
+import React, { useState } from 'react';
 import {View, TextInput, Button, Text, Linking} from 'react-native';
 
 import {secret_key} from '../secret/secret_key.js';
@@ -31,6 +31,8 @@ import {Picker} from '@react-native-picker/picker';
 
       console.log(responseJson);
 
+      console.log("middle of async");
+
         callback(responseJson);
       })
       .catch(error => {
@@ -44,7 +46,12 @@ const HomeScreen = ({navigation}) => {
 
   );
 
-var arr = 0;
+
+
+    var arr = [{"name":"wait"}, {"name":"test"}];
+
+    const [finArray, setfinArray] = React.useState();
+
 
 
     get_elections(function(response) {
@@ -52,12 +59,19 @@ var arr = 0;
 
         arr = json_data.elections.slice(1, json_data.len);
 
+      //  state_arr = useState();
 
-    console.log("FINAL DATA",json_data);
+   //     setfinArray(arr);
+
+        console.log("FINAL DATA",json_data);
+
+        console.log("elect",arr[0].name);
 
 
 
-  console.log("arr", arr);
+        console.log("arr", arr);
+
+    //    setSelectedLanguage(arr[0].name);
 
    //    test = arr[0].name;
 
@@ -65,17 +79,19 @@ var arr = 0;
 
 
 
-      });
+        });
 
+
+  //  setTimeout(() => {
 
        //   const [elections, changeElections] = React.useState(arr);
 
+    console.log("outer arr",arr);
 
-
-
+  const [selectedLanguage, setSelectedLanguage] = useState();
+ //   }, 1000);
 
   return (
-
 
 
     <View
@@ -88,9 +104,18 @@ var arr = 0;
 
 
 
-          <Picker>
-          <Picker.Item label="TEST" value="test" />
-          <Picker.Item label="2" value="3" />
+          <Picker
+            selectedValue={selectedLanguage}
+            onValueChange={(itemValue, itemIndex) =>
+            {
+              setSelectedLanguage(itemValue)
+           //   console.log("ack ack ack arr: ",arr);
+              }
+          }>
+
+          {arr.map((item, key)=> (
+           <Picker.Item label={item.name} value={item.name} key={key} />)
+           )}
           </Picker>
 
 
@@ -124,6 +149,7 @@ var arr = 0;
       />
     </View>
   );
+
 };
 
 export default HomeScreen;
