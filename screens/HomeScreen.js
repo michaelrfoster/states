@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import {View, TextInput, Button, Text, Linking} from 'react-native';
-
+import { useFocusEffect } from '@react-navigation/native';
 import {secret_key} from '../secret/secret_key.js';
 
 
@@ -39,7 +39,59 @@ import {Picker} from '@react-native-picker/picker';
         console.error(error);
       });
   }
+
+
+var FIN_ARR = [{"name":"test1"}, {"name":"test2"}];
+
+
+
+    get_elections(function(response) {
+        var json_data = response;
+
+        FIN_ARR = json_data.elections.slice(1, json_data.len);
+
+        console.log("FINAL DATA",json_data);
+
+        });
+
+
+
 const HomeScreen = ({navigation}) => {
+
+
+
+
+/*useFocusEffect(
+  React.useCallback(() => {
+    let isActive = true;
+
+    const fetchUser = async () => {
+      try {
+           await get_elections(function(response) {
+                var json_data = response;
+
+                FIN_ARR = json_data.elections.slice(1, json_data.len);
+
+                console.log("FINAL DATA",json_data);
+
+                });
+
+        if (isActive) {
+          setUser(user);
+        }
+      } catch (e) {
+        // Handle error
+      }
+    };
+
+    fetchUser();
+
+    return () => {
+      isActive = false;
+    };
+  }, [FIN_ARR])
+);
+*/
 
   const [value, onChangeText] = React.useState(
     'eg. 1234 Sample St. SampleTown LA 98765',
@@ -50,36 +102,8 @@ const HomeScreen = ({navigation}) => {
 
     var arr = [{"name":"wait"}, {"name":"test"}];
 
-    const [finArray, setfinArray] = React.useState();
 
-
-
-    get_elections(function(response) {
-        var json_data = response;
-
-        arr = json_data.elections.slice(1, json_data.len);
-
-      //  state_arr = useState();
-
-   //     setfinArray(arr);
-
-        console.log("FINAL DATA",json_data);
-
-        console.log("elect",arr[0].name);
-
-
-
-        console.log("arr", arr);
-
-    //    setSelectedLanguage(arr[0].name);
-
-   //    test = arr[0].name;
-
-     //    console.log("test", test);
-
-
-
-        });
+    console.log("FIN_ARR: ", FIN_ARR);
 
 
   //  setTimeout(() => {
@@ -113,7 +137,7 @@ const HomeScreen = ({navigation}) => {
               }
           }>
 
-          {arr.map((item, key)=> (
+          {FIN_ARR.map((item, key)=> (
            <Picker.Item label={item.name} value={item.name} key={key} />)
            )}
           </Picker>
