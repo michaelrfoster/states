@@ -13,7 +13,14 @@ const LinksScreen = ({route, navigation}) => {
  //   json_data.state[0].electionAdministrationBody.electionInfoUrl;
 
   return (
-    <View>
+    <View
+    style={{
+                 flex: 1,
+                 flexDirection: 'column',
+                 justifyContent: 'space-evenly',
+                 alignItems: 'center',
+                 padding: 30,
+               }}>
       <Text>
         Here are some links that can provide you with more information about the election.
       </Text>
