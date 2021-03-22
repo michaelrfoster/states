@@ -41,12 +41,12 @@ const styles = StyleSheet.create({
 });
 
 // eslint-disable-next-line no-unused-vars
-function make_google_civic_api_call(address_val, callback) {
+function make_google_civic_api_call(address_val, election_id, callback) {
   // var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo?address=5327 W Keefe Ave Milwaukee, Wisconsin, 53216?electionId=5009';
   // var fetch_string = 'https://www.googleapis.com/civicinfo/v2/elections';
   var fetch_string = 'https://www.googleapis.com/civicinfo/v2/voterinfo';
   fetch_string += '?address=' + address_val;
-  fetch_string += '&electionId=' + '7001';
+  fetch_string += '&electionId=' + election_id;
   fetch_string += '&key=' + secret_key;
 
   fetch(fetch_string, {
@@ -78,9 +78,11 @@ function make_fake_data_call(address_val, callback) {
 const SelectionScreen = ({route, navigation}) => {
   var address_val = route.params.address_val;
 
+  var election_id = route.params.election_id;
+
   var json_data;
 
-  make_google_civic_api_call(address_val, function(response) {
+  make_google_civic_api_call(address_val, election_id, function(response) {
       json_data = response;
     });
 /*

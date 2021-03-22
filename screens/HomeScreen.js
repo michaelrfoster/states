@@ -41,7 +41,7 @@ import {Picker} from '@react-native-picker/picker';
   }
 
 
-var FIN_ARR = [{"name":"test1"}, {"name":"test2"}];
+var FIN_ARR = [{"name":"test1", "id":"1"}, {"name":"test2", "id":2}];
 
 
 
@@ -113,6 +113,9 @@ const HomeScreen = ({navigation}) => {
     console.log("outer arr",arr);
 
   const [selectedLanguage, setSelectedLanguage] = useState();
+
+    const [curid, setcurid] = useState();
+
  //   }, 1000);
 
   return (
@@ -133,12 +136,15 @@ const HomeScreen = ({navigation}) => {
             onValueChange={(itemValue, itemIndex) =>
             {
               setSelectedLanguage(itemValue)
+              console.log("cur id: ", itemValue);
+              setcurid(itemValue);
+              console.log("curid: ", curid);
            //   console.log("ack ack ack arr: ",arr);
               }
           }>
 
           {FIN_ARR.map((item, key)=> (
-           <Picker.Item label={item.name} value={item.name} key={key} />)
+           <Picker.Item label={item.name} value={item.id} key={key} />)
            )}
           </Picker>
 
@@ -167,7 +173,8 @@ const HomeScreen = ({navigation}) => {
 
       <Button
         onPress={() => {
-          navigation.navigate('Select An Option', {address_val: value});
+        console.log("item val: ", curid);
+          navigation.navigate('Select An Option', {address_val: value, election_id: curid});
         }}
         title="Go"
       />
